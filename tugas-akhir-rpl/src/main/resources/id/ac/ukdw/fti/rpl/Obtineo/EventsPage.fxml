@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.PerspectiveTransform?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="id.ac.ukdw.fti.rpl.Obtineo.SceneController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.20001220703125" minWidth="10.0" prefWidth="114.4" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="452.7999877929687" minWidth="10.0" prefWidth="384.80000000000007" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.3999633789062" minWidth="10.0" prefWidth="100.20004882812498" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="106.4" minHeight="10.0" prefHeight="105.60001220703126" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="266.80000000000007" minHeight="10.0" prefHeight="248.39998779296874" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="128.59995117187503" minHeight="0.0" prefHeight="27.799963378906284" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <ImageView fitHeight="77.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logo.jpeg" />
+         </image>
+         <GridPane.margin>
+            <Insets left="30.0" top="30.0" />
+         </GridPane.margin>
+      </ImageView>
+      <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="32.0" prefWidth="259.0" promptText="Search Events" GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets left="40.0" top="40.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Goudy Old Style" size="14.0" />
+         </font>
+      </TextField>
+      <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets left="310.0" top="40.0" />
+         </GridPane.margin>
+      </Button>
+      <ListView fx:id="versesView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="40.0" top="-92.0" />
+         </GridPane.margin>
+         <effect>
+            <InnerShadow>
+               <input>
+                  <PerspectiveTransform />
+               </input>
+            </InnerShadow>
+         </effect>
+      </ListView>
+   </children>
+</GridPane>

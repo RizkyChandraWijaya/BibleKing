@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="id.ac.ukdw.fti.rpl.Obtineo.AppTest" time="0.004" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\MSI-steel\OneDrive\Desktop\tugas-akhir-rpl\target\test-classes;C:\Users\MSI-steel\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-controls\12.0.2\javafx-controls-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-graphics\12.0.2\javafx-graphics-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-base\12.0.2\javafx-base-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-fxml\12.0.2\javafx-fxml-12.0.2.jar;"/>
+    <property name="java.vm.vendor" value="Eclipse Foundation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="Asia/Bangkok"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Foundation\jdk-11.0.12.7-hotspot\bin"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\MSI-steel\AppData\Local\Temp\surefire3179414200494807509 2021-10-31T17-30-12_943-jvmRun1 surefire16659401434765527345tmp surefire_011173333805338727558tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\MSI-steel\OneDrive\Desktop\tugas-akhir-rpl\target\test-classes;C:\Users\MSI-steel\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-controls\12.0.2\javafx-controls-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-graphics\12.0.2\javafx-graphics-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-base\12.0.2\javafx-base-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-fxml\12.0.2\javafx-fxml-12.0.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\MSI-steel"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="jdk.module.path" value="C:\Users\MSI-steel\OneDrive\Desktop\tugas-akhir-rpl\target\classes;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-controls\12.0.2\javafx-controls-12.0.2-win.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-graphics\12.0.2\javafx-graphics-12.0.2-win.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-base\12.0.2\javafx-base-12.0.2-win.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-fxml\12.0.2\javafx-fxml-12.0.2-win.jar;C:\Users\MSI-steel\.m2\repository\org\xerial\sqlite-jdbc\3.32.3.2\sqlite-jdbc-3.32.3.2.jar"/>
+    <property name="java.version.date" value="2021-07-20"/>
+    <property name="java.home" value="C:\Program Files\Eclipse Foundation\jdk-11.0.12.7-hotspot"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\MSI-steel\OneDrive\Desktop\tugas-akhir-rpl"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\MSI-steel\.m2\repository\org\apache\maven\surefire\surefire-booter\2.22.1\surefire-booter-2.22.1.jar;C:\Users\MSI-steel\.m2\repository\org\apache\maven\surefire\surefire-api\2.22.1\surefire-api-2.22.1.jar;C:\Users\MSI-steel\.m2\repository\org\apache\maven\surefire\surefire-logger-api\2.22.1\surefire-logger-api-2.22.1.jar;C:\Users\MSI-steel\OneDrive\Desktop\tugas-akhir-rpl\target\test-classes;C:\Users\MSI-steel\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-controls\12.0.2\javafx-controls-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-graphics\12.0.2\javafx-graphics-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-base\12.0.2\javafx-base-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\openjfx\javafx-fxml\12.0.2\javafx-fxml-12.0.2.jar;C:\Users\MSI-steel\.m2\repository\org\apache\maven\surefire\surefire-junit3\2.22.1\surefire-junit3-2.22.1.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="11.0.12+7"/>
+    <property name="user.name" value="MSI-steel"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-11.0.12+7"/>
+    <property name="localRepository" value="C:\Users\MSI-steel\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\MSI-ST~1\AppData\Local\Temp\"/>
+    <property name="java.version" value="11.0.12"/>
+    <property name="user.dir" value="C:\Users\MSI-steel\OneDrive\Desktop\tugas-akhir-rpl"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\Eclipse Foundation\jdk-11.0.12.7-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\WindowsApps\Microsoft.PowerShell_7.1.5.0_x64__8wekyb3d8bbwe;C:\Program Files\Eclipse Foundation\jdk-11.0.12.7-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Python39\Scripts\;C:\Program Files\Python39\;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\PuTTY\;C:\Users\MSI-steel\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts;C:\Program Files\Java\jdk-11.0.12\bin;C:\Users\MSI-steel\apache-maven-3.8.2\bin;C:\Users\MSI-steel\AppData\Roaming\Python\Python39\Scripts;C:\Users\MSI-steel\AppData\Local\Microsoft\WindowsApps;C:\Users\MSI-steel\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PyCharm Community Edition with Anaconda plugin 2019.3.4\bin;;C:\Users\MSI-steel\AppData\Local\Programs\Python\Python38-32\Scripts;C:\Users\MSI-steel\AppData\Roaming\Composer\vendor\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.2\bin;;C:\Users\MSI-steel\AppData\Local\GitHubDesktop\bin;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Eclipse Foundation"/>
+    <property name="java.vm.version" value="11.0.12+7"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="55.0"/>
+  </properties>
+  <testcase name="testApp" classname="id.ac.ukdw.fti.rpl.Obtineo.AppTest" time="0.001"/>
+</testsuite>

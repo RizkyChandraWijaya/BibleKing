@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.Obtineo.FXMLController">
+   <children>
+      <TableView fx:id="tableVerses" layoutX="102.0" layoutY="84.0" prefHeight="274.0" prefWidth="396.0">
+        <columns>
+          <TableColumn fx:id="verseIdColumn" prefWidth="111.20000839233398" text="VerseID" />
+          <TableColumn fx:id="verseColumn" prefWidth="126.4000244140625" text="Ayat" />
+            <TableColumn fx:id="verseTextColumn" prefWidth="127.20001220703125" text="Teks" />
+        </columns>
+      </TableView>
+      <Text layoutX="234.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tabel Alkitab">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
