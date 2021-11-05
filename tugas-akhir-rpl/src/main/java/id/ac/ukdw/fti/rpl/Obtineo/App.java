@@ -20,7 +20,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws Exception {
         // TODO Auto-generated method stub
-        Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("EventsPage.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Bible King");
         stage.setScene(scene);

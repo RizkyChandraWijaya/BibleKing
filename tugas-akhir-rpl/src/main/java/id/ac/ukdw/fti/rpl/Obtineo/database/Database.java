@@ -5,30 +5,73 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
+import id.ac.ukdw.fti.rpl.Obtineo.modal.Places;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Verse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+
 public class Database {
-    public Connection databaseLink;
+    
+    
+    final String url = "jdbc:sqlite:vizbible.db";
+    private ObservableList<Events> events = FXCollections.observableArrayList();
+    private ObservableList<Places> places = FXCollections.observableArrayList();
+    private Connection connection = null;
+    public static Database instance = new Database();
 
-    public Connection getDBConnection(){
-        String url = "jdbc:sqlite:vizbible.sqlite";
-
+    public Database() {
         try {
-            databaseLink = DriverManager.getConnection(url);
-            System.out.println("Connected");
-
+            connection = DriverManager.getConnection(url);
+            System.out.println("Berhasil");
         } catch (Exception e) {
             //TODO: handle exception
-            e.printStackTrace();
+            System.out.println("Database gagal");
+            System.out.println(e.getMessage());
         }
-
-        return databaseLink;
     }
 
-}
+    public Connection openConnection() {
+        return connection;
+    }
 
+    public ObservableList<Events> getAllEvents(String query) {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            while (result.next()) {
+                Events event = new Events();
+                event.setEventTitle(result.getString("title"));
+                event.setVerses(result.getString("verses"));
+                // event.setVerseId(result.getInt("verseSort"));
+                events.add(event);
+            }
+        } catch (Exception e) {
+            //TODO: handle exception
+            System.out.println(e.getMessage());
+        }
+        return events;
+    }
+    
+    public ObservableList<Places> getPlacesgetAllPlaces(String query) {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            while (result.next()) {
+                Places place = new Places();
+                place.setPlaceTitle(result.getString("title"));
+                place.setVerses(result.getString("verses"));
+                // event.setVerseId(result.getInt("verseSort"));
+                places.add(place);
+            }
+        } catch (Exception e) {
+            //TODO: handle exception
+            System.out.println(e.getMessage());
+        }
+        return places;
+    }
+}
 
 
 
