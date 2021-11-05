@@ -1,31 +1,33 @@
 package id.ac.ukdw.fti.rpl.Obtineo.modal;
 
 public class Places {
-    private String placeTitle;
-    private int verseId;
+    private String displayTitle;
+    private int placeLookup;
     private String verses;
 
-    public void setPlaceTitle(String placeTitle) {
-       this.placeTitle = placeTitle;
+    public void setDisplayTitle(String displayTitle) {
+       this.displayTitle = displayTitle;
     }
 
     public void setVerses(String verses) {
         this.verses = verses;
      }
 
-    public void setVerseId(int verseId) {
-        this.verseId = verseId;
+    public void setPlaceLookup(int placeLookup) {
+        this.placeLookup = placeLookup;
     }
 
     public int getVerseId() {
-        return this.verseId;
+        return this.placeLookup;
     }
 
-    public String getPlaceTitle() {
-        return this.placeTitle;
+    public String getDisplayTitle() {
+        return this.displayTitle;
     }
 
     public String getVerses() {
         return this.verses;
     }
+
+
 }

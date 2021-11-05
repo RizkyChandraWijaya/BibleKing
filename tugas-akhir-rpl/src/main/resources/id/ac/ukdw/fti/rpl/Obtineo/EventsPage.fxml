@@ -40,7 +40,7 @@
             <Font name="Goudy Old Style" size="14.0" />
          </font>
       </TextField>
-      <Button mnemonicParsing="false" onAction="#searchEvent" text="Button" GridPane.columnIndex="1">
+      <Button mnemonicParsing="false" onAction="#searchPlace" text="Button" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets left="310.0" top="40.0" />
          </GridPane.margin>

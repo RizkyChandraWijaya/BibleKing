@@ -60,7 +60,7 @@ public class Database {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
                 Places place = new Places();
-                place.setPlaceTitle(result.getString("title"));
+                place.setDisplayTitle(result.getString("displayTitle"));
                 place.setVerses(result.getString("verses"));
                 // event.setVerseId(result.getInt("verseSort"));
                 places.add(place);

@@ -1,7 +1,7 @@
 package id.ac.ukdw.fti.rpl.Obtineo;
 
 import id.ac.ukdw.fti.rpl.Obtineo.database.Database;
-import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
+import id.ac.ukdw.fti.rpl.Obtineo.modal.Places;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,28 +18,28 @@ public class PlaceController{
 
     @FXML
     private TextField searchBar;
-    ObservableList<Events> events = FXCollections.observableArrayList();
-    ObservableList<String> listItem = FXCollections.observableArrayList();
+    ObservableList<Places> places = FXCollections.observableArrayList();
+    ObservableList<String> listPlaceList = FXCollections.observableArrayList();
     
     @FXML
-    void searchEvent(ActionEvent event) {
-        final String query = "SELECT title, verseSort, verses FROM events where lower(title) like '%"+searchBar.getText().toLowerCase()+"%'";
+    void searchPlaces(ActionEvent event) {
+        final String query = "SELECT displayTitle, verses FROM places where lower(displayTitle) like '%"+searchBar.getText().toLowerCase()+"%'";
         
-        events = Database.instance.getAllEvents(query);
+        places = Database.instance.getPlacesgetAllPlaces(query);
 
         
-        for (Events events2 : events) {
-            listItem.add(events2.getEventTitle()+"\n"+events2.getVerses());
+        for (Places places2 : places) {
+            listPlaceList .add(places2.getDisplayTitle()+"\n"+places2.getVerses());
         }     
-        versesView.setItems(listItem);
+        versesView.setItems(listPlaceList );
         
     }
 
     @FXML
     void deleteSugesstion(KeyEvent event) {
         versesView.getItems().clear();
-        events.clear();
-        listItem.clear();
+        places.clear();
+        listPlaceList .clear();
     }
 
 
