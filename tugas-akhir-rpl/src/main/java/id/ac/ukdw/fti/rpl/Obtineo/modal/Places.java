@@ -2,7 +2,7 @@ package id.ac.ukdw.fti.rpl.Obtineo.modal;
 
 public class Places {
     private String displayTitle;
-    private int placeLookup;
+    private String placeLookup;
     private String verses;
 
     public void setDisplayTitle(String displayTitle) {
@@ -13,11 +13,11 @@ public class Places {
         this.verses = verses;
      }
 
-    public void setPlaceLookup(int placeLookup) {
+    public void setPlaceLookup(String placeLookup) {
         this.placeLookup = placeLookup;
     }
 
-    public int getVerseId() {
+    public String getVerseId() {
         return this.placeLookup;
     }
 

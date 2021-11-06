@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -19,20 +20,21 @@
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.3999633789062" minWidth="10.0" prefWidth="100.20004882812498" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="106.4" minHeight="10.0" prefHeight="105.60001220703126" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="266.80000000000007" minHeight="10.0" prefHeight="248.39998779296874" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="128.59995117187503" minHeight="0.0" prefHeight="27.799963378906284" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="91.80000839233398" minHeight="8.599999046325685" prefHeight="57.400018310546876" />
+    <RowConstraints maxHeight="114.40000095367432" minHeight="10.0" prefHeight="65.59998168945313" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="266.80000000000007" minHeight="10.0" prefHeight="258.3999755859375" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="128.59995117187503" minHeight="0.0" prefHeight="18.4000244140625" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ImageView fitHeight="77.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="80.0" fitWidth="85.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@logo.jpeg" />
+            <Image url="@logo.png" />
          </image>
          <GridPane.margin>
-            <Insets left="30.0" top="30.0" />
+            <Insets left="30.0" top="50.0" />
          </GridPane.margin>
       </ImageView>
-      <TextField fx:id="searchBar" maxHeight="-Infinity" maxWidth="-Infinity" onKeyTyped="#deleteSugesstion" prefHeight="32.0" prefWidth="259.0" promptText="Search Events" GridPane.columnIndex="1">
+      <TextField fx:id="searchBar" maxHeight="-Infinity" maxWidth="-Infinity" onKeyTyped="#deleteSugesstion" prefHeight="32.0" prefWidth="259.0" promptText="Search Events" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="40.0" top="40.0" />
          </GridPane.margin>
@@ -40,12 +42,12 @@
             <Font name="Goudy Old Style" size="14.0" />
          </font>
       </TextField>
-      <Button mnemonicParsing="false" onAction="#searchPlace" text="Button" GridPane.columnIndex="1">
+      <Button mnemonicParsing="false" onAction="#searchEvent" style="-fx-background-color: black;" text="search" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="310.0" top="40.0" />
          </GridPane.margin>
       </Button>
-      <ListView fx:id="versesView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <ListView fx:id="versesView" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#selectedEvent" prefHeight="200.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="40.0" />
          </GridPane.margin>
@@ -53,5 +55,13 @@
             <InnerShadow />
          </effect>
       </ListView>
+      <Label text="Event's Search Page" GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets left="80.0" top="50.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="Tw Cen MT Condensed" size="33.0" />
+         </font>
+      </Label>
    </children>
 </GridPane>

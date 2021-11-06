@@ -1,124 +1,98 @@
 package id.ac.ukdw.fti.rpl.Obtineo;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import id.ac.ukdw.fti.rpl.Obtineo.database.Database;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-
+import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+
 
 public class EventController{
-
     @FXML
     private ListView versesView;
 
     @FXML
     private TextField searchBar;
-    ObservableList<Events> events = FXCollections.observableArrayList();
-    ObservableList<String> listItem = FXCollections.observableArrayList();
+    private ObservableList<Events> events = FXCollections.observableArrayList();
+    private ObservableList<String> listItem = FXCollections.observableArrayList();
+    private static String selectedItem = new String(); 
+    private static List<String> selectedItemVerses = new ArrayList<String>();  
+    public static EventController instance = new EventController();
+    private Stage stage;
+    private Scene scene;
     
     @FXML
     void searchEvent(ActionEvent event) {
-        final String query = "SELECT title, verseSort, verses FROM events where lower(title) like '%"+searchBar.getText().toLowerCase()+"%'";
-        
+        final String query = "SELECT title, verseSort, verses FROM events where lower(title) like '%"+searchBar.getText().toLowerCase()+"%'";        
         events = Database.instance.getAllEvents(query);
-
-        
         for (Events events2 : events) {
             listItem.add(events2.getEventTitle()+"\n"+events2.getVerses());
-        }     
-        versesView.setItems(listItem);
-        
+        }
+        if(listItem.size()>0){
+            versesView.setItems(listItem);
+        }else{
+            versesView.setPlaceholder(new Label("Pencarian Tidak Ditemukan"));
+        }
     }
 
     @FXML
     void deleteSugesstion(KeyEvent event) {
+        versesView.setPlaceholder(new Label(" "));
         versesView.getItems().clear();
         events.clear();
         listItem.clear();
     }
 
+    @FXML
+    void selectedEvent(MouseEvent event) throws IOException{
+        String text = versesView.getSelectionModel().getSelectedItem().toString();
+        String[] kumpulanAyat = text.split("\n");
+        String[] ayat = kumpulanAyat[1].split(",");
+        selectedItem = kumpulanAyat[0];
 
-    // @FXML
-    // void tampilSementara(KeyEvent event) {
+        for (int i = 0; i < ayat.length; i++) {
+            selectedItemVerses.add(ayat[i].strip());
+        }
 
-    // }
+        Parent root = FXMLLoader.load(getClass().getResource("DetailEvent.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();   
+    }
+
+    @FXML
+    void backHome(MouseEvent event) throws IOException{
+        events.clear();
+        listItem.clear();
+        selectedItem = null;
+        selectedItemVerses.clear();
+        Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static String getSelectedItem() {
+        return selectedItem;
+    }
+
+    public static List<String> getSelectedItemVerses() {
+        return selectedItemVerses;
+    }
 }
-
-// public class EventController{
-
-//     @FXML
-//     private ListView versesView;
-
-//     @FXML
-//     private TextField searchBar;
-    
-//     @FXML
-//     void searchEvent(ActionEvent event) {
-        
-//         try {
-//             final String query = "SELECT title, verseSort, verses FROM events where title like '%"+searchBar.getText()+"%'";
-//             ObservableList<Events> events = FXCollections.observableArrayList();
-//             events = Database.instance.getAllEvents(query);
-
-//             ObservableList<String> listItem = FXCollections.observableArrayList();
-//             for (Events events2 : events) {
-//                 listItem.add(events2.getEventTitle()+"\n"+events2.getVerses());
-        
-//             }
-        
-//         versesView.setItems(listItem);
-//         listItem.clear();
-            
-//         } catch (Exception e) {
-//             //TODO: handle exception
-//             e.printStackTrace();
-//         }
-        
-//         versesView.getItems().removeAll();
-//     }
-
-//     @FXML
-//     void deleteSugesstion(KeyEvent event) {
-//         versesView.getItems().clear();
-//     }
-
-
-//     // @FXML
-//     // void tampilSementara(KeyEvent event) {
-
-//     // }
-// }
-
-
-
-
-
-
-        // events.getItems().getEventTitle().getText();
-        
-        // List<String> eventTitle = events.getEventTitle();
-    //     // versesView.getItems().add("eee");
-    //     System.out.println("Ini initialize");
-    //     if(events.size()==0) {
-    //         System.out.println("gagal baca database");
-    //     }else{
-    //         for (Events events2 : events) {
-    //             // System.out.println(events2.getEventTitle());
-    
-        // List value = Arrays.asList("one", "two", "three");
-        // List value = Arrays.asList(events).getAllEventTitle().getText());
-        // List<String> values = Arrays.asList("one", "two", "three");
-       
-        
-        
-        
-        
-        
-    
-    
-
