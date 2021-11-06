@@ -55,13 +55,9 @@
             <Insets left="310.0" top="40.0" />
          </GridPane.margin>
       </Button>
-<<<<<<< Updated upstream
       <ListView fx:id="versesView" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#selectedEvent" prefHeight="200.0" prefWidth="324.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-=======
-      <ListView fx:id="versesView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="254.0" prefWidth="399.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
->>>>>>> Stashed changes
          <GridPane.margin>
-            <Insets />
+            <Insets left="40.0" />
          </GridPane.margin>
          <effect>
             <InnerShadow />
