@@ -26,6 +26,14 @@
       <RowConstraints maxHeight="128.59995117187503" minHeight="0.0" prefHeight="18.4000244140625" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
+      <ImageView fitHeight="406.0" fitWidth="600.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@bg1.jpg" />
+         </image>
+         <GridPane.margin>
+            <Insets top="344.0" />
+         </GridPane.margin>
+      </ImageView>
       <ImageView fitHeight="80.0" fitWidth="85.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@logo.png" />
@@ -47,9 +55,13 @@
             <Insets left="310.0" top="40.0" />
          </GridPane.margin>
       </Button>
-      <ListView fx:id="versesView" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#selectedEvent" prefHeight="200.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+<<<<<<< Updated upstream
+      <ListView fx:id="versesView" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#selectedEvent" prefHeight="200.0" prefWidth="324.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+=======
+      <ListView fx:id="versesView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="254.0" prefWidth="399.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+>>>>>>> Stashed changes
          <GridPane.margin>
-            <Insets left="40.0" />
+            <Insets />
          </GridPane.margin>
          <effect>
             <InnerShadow />

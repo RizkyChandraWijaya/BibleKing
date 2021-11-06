@@ -26,6 +26,14 @@
       <RowConstraints maxHeight="128.59995117187503" minHeight="0.0" prefHeight="27.799963378906284" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
+      <ImageView fitHeight="401.0" fitWidth="606.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@bg1.jpg" />
+         </image>
+         <GridPane.margin>
+            <Insets top="319.0" />
+         </GridPane.margin>
+      </ImageView>
       <ImageView fitHeight="77.0" fitWidth="84.0" onMouseClicked="#backHome" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@logo.png" />
@@ -47,7 +55,7 @@
             <Insets left="310.0" top="30.0" />
          </GridPane.margin>
       </Button>
-      <ListView fx:id="placesView" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#selectedPlaces" prefHeight="200.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <ListView fx:id="placesView" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#selectedPlaces" prefHeight="200.0" prefWidth="325.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="40.0" />
          </GridPane.margin>
