@@ -12,11 +12,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -37,15 +40,19 @@ public class EventController{
     
     @FXML
     void searchEvent(ActionEvent event) {
-        final String query = "SELECT title, verseSort, verses FROM events where lower(title) like '%"+searchBar.getText().toLowerCase()+"%'";        
-        events = Database.instance.getAllEvents(query);
-        for (Events events2 : events) {
-            listItem.add(events2.getEventTitle()+"\n"+events2.getVerses());
-        }
-        if(listItem.size()>0){
-            versesView.setItems(listItem);
+        if(searchBar.getText().isEmpty()){
+            alert(event);
         }else{
-            versesView.setPlaceholder(new Label("Pencarian Tidak Ditemukan"));
+            final String query = "SELECT title, verseSort, verses FROM events where lower(title) like '%"+searchBar.getText().toLowerCase()+"%'";        
+            events = Database.instance.getAllEvents(query);
+            for (Events events2 : events) {
+                listItem.add(events2.getEventTitle()+"\n"+events2.getVerses());
+            }
+            if(listItem.size()>0){
+                versesView.setItems(listItem);
+            }else{
+                alert(event);
+            }
         }
     }
 
@@ -59,20 +66,24 @@ public class EventController{
 
     @FXML
     void selectedEvent(MouseEvent event) throws IOException{
-        String text = versesView.getSelectionModel().getSelectedItem().toString();
-        String[] kumpulanAyat = text.split("\n");
-        String[] ayat = kumpulanAyat[1].split(",");
-        selectedItem = kumpulanAyat[0];
+        try {
+            String text = versesView.getSelectionModel().getSelectedItem().toString();
+            String[] kumpulanAyat = text.split("\n");
+            String[] ayat = kumpulanAyat[1].split(",");
+            selectedItem = kumpulanAyat[0];
 
-        for (int i = 0; i < ayat.length; i++) {
-            selectedItemVerses.add(ayat[i].strip());
+            for (int i = 0; i < ayat.length; i++) {
+                selectedItemVerses.add(ayat[i].strip());
+            }
+
+            Parent root = FXMLLoader.load(getClass().getResource("DetailEvent.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();   
+        } catch (Exception e) {
+            e.getMessage();
         }
-
-        Parent root = FXMLLoader.load(getClass().getResource("DetailEvent.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();   
     }
 
     @FXML
@@ -86,6 +97,29 @@ public class EventController{
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    private  void alert(ActionEvent event){
+        if(searchBar.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("logo.png")));
+            alert.setTitle("Bible King");
+            alert.setHeaderText(null);
+            alert.setContentText("Masukkan keyword pencarian terlebih dahulu");
+            alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("logo.png")));
+            String keyword = searchBar.getText();
+            alert.setTitle("Bible King");
+            alert.setHeaderText(null);
+            alert.setContentText("Pencarian keyword: "+keyword+" tidak ditemukan");
+            alert.showAndWait();
+        }
     }
 
     public static String getSelectedItem() {
