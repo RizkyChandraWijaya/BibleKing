@@ -43,7 +43,7 @@ public class EventController{
         if(searchBar.getText().isEmpty()){
             alert(event);
         }else{
-            final String query = "SELECT title, verseSort, verses FROM events where lower(title) like '%"+searchBar.getText().toLowerCase()+"%'";        
+            final String query = "SELECT title, verseSort, verses FROM events where lower(title) like '%"+searchBar.getText().toLowerCase()+"%'";
             events = Database.instance.getAllEvents(query);
             for (Events events2 : events) {
                 listItem.add(events2.getEventTitle()+"\n"+events2.getVerses());
@@ -80,7 +80,7 @@ public class EventController{
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
-            stage.show();   
+            stage.show();
         } catch (Exception e) {
             e.getMessage();
         }

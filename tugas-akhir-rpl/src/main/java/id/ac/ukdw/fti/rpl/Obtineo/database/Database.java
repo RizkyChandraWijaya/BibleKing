@@ -35,9 +35,11 @@ public class Database {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
                 Verses verse = new Verses();
-                verse.setVerseId(result.getInt("verseId"));
                 verse.setVerse(result.getString("osisRef"));
                 verse.setVerseText(result.getString("verseText"));
+                verse.setYearNum(result.getString("yearNum"));
+                verse.setPlaces(result.getString("places"));
+                verse.setPlacesCount(result.getInt("placesCount"));
                 verses.add(verse);
             }
         } catch (Exception e) {
