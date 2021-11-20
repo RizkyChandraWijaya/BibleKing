@@ -82,6 +82,7 @@ public class Database {
                 place.setPlaceLookup(result.getString("placeLookUp"));
                 place.setDisplayTitle(result.getString("displayTitle"));
                 place.setVerses(result.getString("verses"));
+                place.setFeatureType(result.getString("featureType"));
                 places.add(place);
             }
         } catch (Exception e) {

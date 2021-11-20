@@ -27,10 +27,10 @@
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="584.8000061035157" minWidth="10.0" prefWidth="70.26678466796875" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="128.59998168945313" minHeight="0.0" prefHeight="66.79998397827148" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="305.40000000000003" minHeight="3.6000122070312557" prefHeight="173.00001220703126" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="266.8" minHeight="10.0" prefHeight="14.733319091796886" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="477.86662597656255" minHeight="10.0" prefHeight="477.86662597656255" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="128.59998168945313" minHeight="0.0" prefHeight="59.59999389648438" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="305.40000000000003" minHeight="3.6000122070312557" prefHeight="222.8000061035156" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="266.8" minHeight="10.0" prefHeight="57.59998779296876" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="521.6000122070311" minHeight="10.0" prefHeight="509.60001220703117" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="337.3999923706055" minHeight="10.0" prefHeight="18.133374023437455" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
@@ -77,13 +77,13 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="pieChart" text="pieChart">
+            <Tab fx:id="pieChart" text="Featured Type">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <AnchorPane layoutX="34.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <PieChart layoutX="54.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <PieChart fx:id="eventPieChart" layoutX="54.0" layoutY="13.0" legendSide="RIGHT" prefHeight="449.6" prefWidth="879.2" title="Featured Type of Places" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </children>

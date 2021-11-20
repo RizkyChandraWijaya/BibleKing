@@ -4,6 +4,7 @@ public class Places {
     private String displayTitle;
     private String placeLookup;
     private String verses;
+    private String featureType;
 
     public void setDisplayTitle(String displayTitle) {
        this.displayTitle = displayTitle;
@@ -17,6 +18,10 @@ public class Places {
         this.placeLookup = placeLookup;
     }
 
+    public void setFeatureType(String featureType) {
+        this.featureType = featureType;
+    }
+
     public String getVerseId() {
         return this.placeLookup;
     }
@@ -27,6 +32,10 @@ public class Places {
 
     public String getVerses() {
         return this.verses;
+    }
+
+    public String getFeatureType(){
+        return this.featureType;
     }
 
 
