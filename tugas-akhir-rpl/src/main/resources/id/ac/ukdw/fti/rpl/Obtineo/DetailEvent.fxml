@@ -83,7 +83,7 @@
                      <children>
                         <AnchorPane layoutX="34.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <PieChart fx:id="eventPieChart" layoutX="54.0" layoutY="13.0" legendSide="RIGHT" prefHeight="449.6" prefWidth="879.2" title="Featured Type of Places" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <PieChart fx:id="eventPieChart" layoutX="54.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" title="Featured Type of Places" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </children>
