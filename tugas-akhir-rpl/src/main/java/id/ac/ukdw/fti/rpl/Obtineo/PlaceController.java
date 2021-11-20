@@ -45,10 +45,10 @@ public class PlaceController{
             alert(event);
         }else{
             //query select di class Database
-            final String query = "SELECT displayTitle,verses,placeLookup FROM places where lower(displayTitle) like '%"+searchBar.getText().toLowerCase()+"%'";       
+            final String query = "SELECT displayTitle,verses,placeLookup,featureType,verseCount FROM places where lower(displayTitle) like '%"+searchBar.getText().toLowerCase()+"%'";       
                     
             //manggil database dan method getAllPlaces
-            places = Database.instance.getPlacesgetAllPlaces(query);
+            places = Database.instance.getAllPlaces(query);
 
             //foreach buat ambil value dari objek places lalu ditambahkan di listPlaces
             for (Places places2 : places) {
@@ -89,6 +89,9 @@ public class PlaceController{
             for (int i = 0; i < ayat.length; i++) {
                 selectedItemVerses.add(ayat[i].strip());
             }
+
+            // System.out.println(selectedItemVerses.size());
+            // System.out.println(selectedItemVerses.get(0));
 
             //pindah halam ke detailPlaces
             Parent root = FXMLLoader.load(getClass().getResource("DetailPlace.fxml"));

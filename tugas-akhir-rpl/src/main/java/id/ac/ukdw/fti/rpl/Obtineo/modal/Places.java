@@ -5,10 +5,15 @@ public class Places {
     private String placeLookup;
     private String verses;
     private String featureType;
+    private int verseCount;
 
     public void setDisplayTitle(String displayTitle) {
        this.displayTitle = displayTitle;
     }
+
+    public void setVerseCount(int verseCount) {
+        this.verseCount = verseCount;
+     }
 
     public void setVerses(String verses) {
         this.verses = verses;
@@ -28,6 +33,10 @@ public class Places {
 
     public String getDisplayTitle() {
         return this.displayTitle;
+    }
+
+    public int getVerseCoun() {
+        return this.verseCount;
     }
 
     public String getVerses() {

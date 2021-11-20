@@ -40,6 +40,7 @@ public class Database {
                 verse.setYearNum(result.getString("yearNum"));
                 verse.setPlaces(result.getString("places"));
                 verse.setPlacesCount(result.getInt("placesCount"));
+                verse.setTimeline(result.getString("timeline"));
                 verses.add(verse);
             }
         } catch (Exception e) {
@@ -72,7 +73,7 @@ public class Database {
     }
 
     //menjalankan query yang dipanggil di class controller lalu set places di class Places
-    public ObservableList<Places> getPlacesgetAllPlaces(String query) {
+    public ObservableList<Places> getAllPlaces(String query) {
         try {
             places.clear();
             Statement statement = connection.createStatement();
@@ -83,6 +84,7 @@ public class Database {
                 place.setDisplayTitle(result.getString("displayTitle"));
                 place.setVerses(result.getString("verses"));
                 place.setFeatureType(result.getString("featureType"));
+                place.setVerseCount(result.getInt("verseCount"));
                 places.add(place);
             }
         } catch (Exception e) {

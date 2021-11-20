@@ -97,7 +97,7 @@ public class DetailEventController implements Initializable {
     private String yearNum;
     private String places;
     private String displayTitlePlaces = "";
-    private String featureTypePlaces ="";
+    private String featureTypePlaces = "";
     private String title;
     private String placeEvent;
     private String duration;
@@ -133,32 +133,53 @@ public class DetailEventController implements Initializable {
         // events = Database.instance.getAllEvents(queryEvent);
         for (Events events2 : events) {
             title = events2.getEventTitle();
-            placeEvent = events2.getPlacesVerses();
-            String[] placesSplit = placeEvent.split(",");
-            for (String placesSplit2 : placesSplit) {
-                String queryPlaces = "SELECT placeLookup,displayTitle,verses,featureType FROM places where lower(placeLookup)='"+placesSplit2.toLowerCase()+"'";
-                placesFromEvent.addAll(Database.instance.getPlacesgetAllPlaces(queryPlaces));
+            if(events2.getPlacesVerses()!=null){
+                placeEvent = events2.getPlacesVerses();
+                String[] placesSplit = placeEvent.split(",");
+                for (String placesSplit2 : placesSplit) {
+                    String queryPlaces = "SELECT placeLookup,displayTitle,verses,featureType,verseCount FROM places where lower(placeLookup)='"+placesSplit2.toLowerCase()+"'";
+                    placesFromEvent.addAll(Database.instance.getAllPlaces(queryPlaces));
+                }
+                for (Places places2:placesFromEvent){
+                    if(places2.getDisplayTitle()!=null){
+                        if(placesFromEvent.indexOf(places2)==placesFromEvent.size()-1){
+                            displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle();
+                        }else{
+                            displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle()+", ";
+                        }
+                        //System.out.println(places2.getFeatureType());
+                        if(places2.getFeatureType()!=null){
+                            arrFeatureType.add(places2.getFeatureType());
+                        }else{
+                            arrFeatureType.add("Unknown");
+                        }
+                    }
+                }
+            }else{
+                displayTitlePlaces = "Unknown";
+                arrFeatureType.add("Unknown");
             }
+            
 
-            if(events2.getDuration()!="null"){
+            if(events2.getDuration()!=null){
                 duration = events2.getDuration();
             }else{
                 duration = "unknown";
             }
             
-            if(events2.getPredecessor()!="null"){
+            if(events2.getPredecessor()!=null){
                 predecessor = events2.getPredecessor();
             }else{
                 predecessor = "unknown";
             }
             
-            if(events2.getPartOf()!="null"){
+            if(events2.getPartOf()!=null){
                 partOf = events2.getPartOf();
             }else{
                 partOf = "unknown";
             }
             
-            if(events2.getStartDate()!="null"){
+            if(events2.getStartDate()!=null){
                 startDate = events2.getStartDate();
             }else{
                 startDate = "unknown";
@@ -166,29 +187,10 @@ public class DetailEventController implements Initializable {
             
         }
         
-        
-        for (Places places2:placesFromEvent){
-            if(places2.getDisplayTitle()!="null"){
-                if(placesFromEvent.indexOf(places2)==placesFromEvent.size()-1){
-                    displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle();
-                }else{
-                    displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle()+", ";
-                }
-<<<<<<< HEAD
-                //System.out.println(places2.getFeatureType());
-                if(places2.getFeatureType()!=null){
-                    arrFeatureType.add(places2.getFeatureType());
-                }else{
-                    arrFeatureType.add("Unknown");
-                }
-=======
->>>>>>> 5a844ada52997f1f7b13219d551106e5a30b14ec
-            }
-        }
-
-        for (String string : arrFeatureType) {
-            System.out.println(string);
-        }
+    
+        // for (String string : arrFeatureType) {
+        //     System.out.println(string);
+        // }
 
         labelDetail.setText(    "Event: "+selectedItem +"\n\n"+
                                 "Places: "+displayTitlePlaces+"\n\n"+
@@ -288,7 +290,7 @@ public class DetailEventController implements Initializable {
 
     @FXML
     void detailText(MouseEvent event){
-        String selectedVerses = tableEventVerse.getSelectionModel().getSelectedItem().toString();
+        // String selectedVerses = tableEventVerse.getSelectionModel().getSelectedItem().toString();
         // String queryText = "SELECT title,startDate,duration,predecessor,partOf,'places (from verses)'  FROM event where lower(osisRef)='"+selectedVerses.toLowerCase()+"'";
         // events.addAll(Database.instance.getAllVerses(queryText));
     }

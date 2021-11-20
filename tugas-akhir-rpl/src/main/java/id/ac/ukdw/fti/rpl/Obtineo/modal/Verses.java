@@ -6,6 +6,15 @@ public class Verses {
     private String yearNum;
     private String places;
     private int placesCount;
+    private String timeline;
+
+    public void setTimeline(String timeline) {
+        this.timeline = timeline;
+    }
+
+    public String getTimeline() {
+        return this.timeline;
+    }
     
     public void setVerse(String verse) {
         this.verse = verse;
