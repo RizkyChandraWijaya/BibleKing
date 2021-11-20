@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import id.ac.ukdw.fti.rpl.Obtineo.database.Database;
+import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Verses;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -72,19 +73,24 @@ public class DetailEventController implements Initializable {
     @FXML
     private AnchorPane text;
 
+    @FXML
+    private Label labelDetail;
+
     private Stage stage;
     private Scene scene;
     private ObservableList<Verses> verses = FXCollections.observableArrayList();
-    private ObservableList<Verses> events = FXCollections.observableArrayList();
+    private ObservableList<Events> events = FXCollections.observableArrayList();
     private String selectedItem = new String(); 
     private List<String> selectedItemVerses = new ArrayList<String>();
-    private String osisRef;
-    private String verseText;
     private String yearNum;
     private String places;
-    private String placesCount;
-    private String timeline;
-      
+    String title;
+    String placeEvent;
+    String duration;
+    String predecessor;
+    String partOf;
+    String startDate;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -103,8 +109,26 @@ public class DetailEventController implements Initializable {
         //=========================table====================================
         
         //=========================text====================================
+        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where lower(title) like '"+selectedItem.toLowerCase()+"'";
+        events = Database.instance.getAllEvents(queryEvent);
         
-        
+        for (Events events2 : events) {
+            System.out.println(events2);
+            title = events2.getEventTitle();
+            placeEvent = events2.getPlacesVerses();
+            duration = events2.getDuration();
+            predecessor = events2.getPredecessor();
+            partOf = events2.getPartOf();
+            startDate = events2.getStartDate();
+            
+        }
+        labelDetail.setText(    "Event: "+selectedItem +"\n\n"+
+                                "Places: "+placeEvent+"\n\n"+
+                                "Duration: "+duration+"\n\n"+
+                                "Predecessor: "+predecessor+"\n\n"+
+                                "Part Of: "+partOf+"\n\n"+
+                                "Start Date: "+startDate+"\n\n"
+            );
         //=========================text====================================
 
         //~~~~~~~~~~~~~~~~~~timeline~~~~~~~~~~~~~~~~~~~
@@ -167,15 +191,8 @@ public class DetailEventController implements Initializable {
 
     @FXML
     void detailText(MouseEvent event){
-        text.getChildren().clear();
         String selectedVerses = tableEventVerse.getSelectionModel().getSelectedItem().toString();
         // String queryText = "SELECT title,startDate,duration,predecessor,partOf,'places (from verses)'  FROM event where lower(osisRef)='"+selectedVerses.toLowerCase()+"'";
         // events.addAll(Database.instance.getAllVerses(queryText));
-
-        Label labelVerses = new Label(selectedVerses);
-        
-        text.getChildren().add(labelVerses);
-        
-
     }
 }

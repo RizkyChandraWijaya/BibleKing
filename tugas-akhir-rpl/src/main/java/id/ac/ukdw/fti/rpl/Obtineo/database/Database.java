@@ -58,6 +58,11 @@ public class Database {
                 Events event = new Events();
                 event.setEventTitle(result.getString("title"));
                 event.setVerses(result.getString("verses"));
+                event.setPlacesVerses(result.getString("places"));
+                event.setDuration(result.getString("duration"));
+                event.setPredecessor(result.getString("predecessor"));
+                event.setPartOf(result.getString("partOf"));
+                event.setStartDate(result.getString("startDate"));
                 events.add(event);
             }
         } catch (Exception e) {
