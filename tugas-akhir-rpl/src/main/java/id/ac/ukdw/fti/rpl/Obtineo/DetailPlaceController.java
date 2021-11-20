@@ -70,7 +70,7 @@ public class DetailPlaceController implements Initializable{
 
         //perulangan untuk menampilkan seluruh ayat yang ada di list ke table
         for (String ayat:selectedItemVerses) {
-            String query = "SELECT osisRef, verseId, verseText  FROM verses where lower(osisRef)='"+ayat.toLowerCase()+"'";
+            String query = "SELECT osisRef, verseText,yearNum,places,placesCount  FROM verses where lower(osisRef)='"+ayat.toLowerCase()+"'";
             verses.addAll(Database.instance.getAllVerses(query));
         }
         

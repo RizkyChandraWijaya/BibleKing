@@ -79,6 +79,7 @@ public class Database {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
                 Places place = new Places();
+                place.setPlaceLookup(result.getString("placeLookUp"));
                 place.setDisplayTitle(result.getString("displayTitle"));
                 place.setVerses(result.getString("verses"));
                 places.add(place);

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import id.ac.ukdw.fti.rpl.Obtineo.database.Database;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
+import id.ac.ukdw.fti.rpl.Obtineo.modal.Places;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Verses;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,16 +81,18 @@ public class DetailEventController implements Initializable {
     private Scene scene;
     private ObservableList<Verses> verses = FXCollections.observableArrayList();
     private ObservableList<Events> events = FXCollections.observableArrayList();
+    private ObservableList<Places> placesFromEvent = FXCollections.observableArrayList();
     private String selectedItem = new String(); 
     private List<String> selectedItemVerses = new ArrayList<String>();
     private String yearNum;
     private String places;
-    String title;
-    String placeEvent;
-    String duration;
-    String predecessor;
-    String partOf;
-    String startDate;
+    private String displayTitlePlaces = "";
+    private String title;
+    private String placeEvent;
+    private String duration;
+    private String predecessor;
+    private String partOf;
+    private String startDate;
 
 
     @Override
@@ -109,21 +112,57 @@ public class DetailEventController implements Initializable {
         //=========================table====================================
         
         //=========================text====================================
-        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where lower(title) like '"+selectedItem.toLowerCase()+"'";
+        String replaceTitle = "LOWER(REPLACE(title,\"'\",\" \"))";
+        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where "+replaceTitle+" like '"+selectedItem.toLowerCase().replace("'", " ")+"'";
         events = Database.instance.getAllEvents(queryEvent);
         
+        // String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where lower(title) like '"+selectedItem.toLowerCase()+"'";
+        // events = Database.instance.getAllEvents(queryEvent);
         for (Events events2 : events) {
             System.out.println(events2);
             title = events2.getEventTitle();
             placeEvent = events2.getPlacesVerses();
-            duration = events2.getDuration();
-            predecessor = events2.getPredecessor();
-            partOf = events2.getPartOf();
-            startDate = events2.getStartDate();
+            String[] placesSplit = placeEvent.split(",");
+            for (String placesSplit2 : placesSplit) {
+                String queryPlaces = "SELECT placeLookup,displayTitle,verses FROM places where lower(placeLookup)='"+placesSplit2.toLowerCase()+"'";
+                placesFromEvent.addAll(Database.instance.getPlacesgetAllPlaces(queryPlaces));
+            }
+
+            if(events2.getDuration()!=null){
+                duration = events2.getDuration();
+            }else{
+                duration = "unknown";
+            }
+            
+            if(events2.getPredecessor()!=null){
+                predecessor = events2.getPredecessor();
+            }else{
+                predecessor = "unknown";
+            }
+            
+            if(events2.getPartOf()!=null){
+                partOf = events2.getPartOf();
+            }else{
+                partOf = "unknown";
+            }
+            
+            if(events2.getStartDate()!=null){
+                startDate = events2.getStartDate();
+            }else{
+                startDate = "unknown";
+            }
+            
             
         }
+        
+        for (Places places2:placesFromEvent){
+            if(places2.getDisplayTitle()!="null"){
+                displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle()+", ";
+            }
+        }
+
         labelDetail.setText(    "Event: "+selectedItem +"\n\n"+
-                                "Places: "+placeEvent+"\n\n"+
+                                "Places: "+displayTitlePlaces+"\n\n"+
                                 "Duration: "+duration+"\n\n"+
                                 "Predecessor: "+predecessor+"\n\n"+
                                 "Part Of: "+partOf+"\n\n"+
