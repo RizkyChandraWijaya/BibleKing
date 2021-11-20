@@ -78,13 +78,13 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="pieChart" text="Featured Type">
+            <Tab fx:id="pieChart" text="Event Duration">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <AnchorPane layoutX="34.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <PieChart fx:id="placePieChart" layoutX="54.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" title="Featured Type of Places" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <PieChart fx:id="placePieChart" layoutX="54.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" title="Event Duration" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </children>
