@@ -140,25 +140,25 @@ public class DetailEventController implements Initializable {
                 placesFromEvent.addAll(Database.instance.getPlacesgetAllPlaces(queryPlaces));
             }
 
-            if(events2.getDuration()!=null){
+            if(events2.getDuration()!="null"){
                 duration = events2.getDuration();
             }else{
                 duration = "unknown";
             }
             
-            if(events2.getPredecessor()!=null){
+            if(events2.getPredecessor()!="null"){
                 predecessor = events2.getPredecessor();
             }else{
                 predecessor = "unknown";
             }
             
-            if(events2.getPartOf()!=null){
+            if(events2.getPartOf()!="null"){
                 partOf = events2.getPartOf();
             }else{
                 partOf = "unknown";
             }
             
-            if(events2.getStartDate()!=null){
+            if(events2.getStartDate()!="null"){
                 startDate = events2.getStartDate();
             }else{
                 startDate = "unknown";
@@ -174,12 +174,15 @@ public class DetailEventController implements Initializable {
                 }else{
                     displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle()+", ";
                 }
+<<<<<<< HEAD
                 //System.out.println(places2.getFeatureType());
                 if(places2.getFeatureType()!=null){
                     arrFeatureType.add(places2.getFeatureType());
                 }else{
                     arrFeatureType.add("Unknown");
                 }
+=======
+>>>>>>> 5a844ada52997f1f7b13219d551106e5a30b14ec
             }
         }
 
