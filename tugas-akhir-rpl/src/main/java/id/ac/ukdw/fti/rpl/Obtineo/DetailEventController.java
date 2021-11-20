@@ -67,6 +67,9 @@ public class DetailEventController implements Initializable {
     private Tab pieChart;
 
     @FXML
+    private Label detailPieChart;
+
+    @FXML
     private PieChart eventPieChart = new PieChart();
 
     @FXML
@@ -131,6 +134,8 @@ public class DetailEventController implements Initializable {
         
         // String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where lower(title) like '"+selectedItem.toLowerCase()+"'";
         // events = Database.instance.getAllEvents(queryEvent);
+        Set<String> uniques = new HashSet<String>();
+        Map<String, String> pair = new HashMap<String, String>();
         for (Events events2 : events) {
             title = events2.getEventTitle();
             if(events2.getPlacesVerses()!=null){
@@ -140,12 +145,17 @@ public class DetailEventController implements Initializable {
                     String queryPlaces = "SELECT placeLookup,displayTitle,verses,featureType,verseCount FROM places where lower(placeLookup)='"+placesSplit2.toLowerCase()+"'";
                     placesFromEvent.addAll(Database.instance.getAllPlaces(queryPlaces));
                 }
+
+                
                 for (Places places2:placesFromEvent){
                     if(places2.getDisplayTitle()!=null){
                         if(placesFromEvent.indexOf(places2)==placesFromEvent.size()-1){
-                            displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle();
+                            // displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle();
+                            uniques.add(places2.getDisplayTitle());
+
                         }else{
-                            displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle()+", ";
+                            // displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle()+", ";
+                            uniques.add(places2.getDisplayTitle());
                         }
                         //System.out.println(places2.getFeatureType());
                         if(places2.getFeatureType()!=null){
@@ -156,7 +166,7 @@ public class DetailEventController implements Initializable {
                     }
                 }
             }else{
-                displayTitlePlaces = "Unknown";
+                // displayTitlePlaces = "Unknown";
                 arrFeatureType.add("Unknown");
             }
             
@@ -191,7 +201,7 @@ public class DetailEventController implements Initializable {
         // for (String string : arrFeatureType) {
         //     System.out.println(string);
         // }
-
+        displayTitlePlaces = displayTitlePlaces.join(", ", uniques);
         labelDetail.setText(    "Event: "+selectedItem +"\n\n"+
                                 "Places: "+displayTitlePlaces+"\n\n"+
                                 "Duration: "+duration+"\n\n"+
@@ -261,7 +271,10 @@ public class DetailEventController implements Initializable {
         // System.out.println(list);
         
         eventPieChart.setData(list);
+        
+        //DETAIL PIE CHART
 
+        // detailPieChart.setText(pair.toString());
     }
 
     @FXML
