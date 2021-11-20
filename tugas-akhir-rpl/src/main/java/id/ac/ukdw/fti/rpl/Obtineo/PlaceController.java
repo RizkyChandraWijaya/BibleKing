@@ -45,7 +45,7 @@ public class PlaceController{
             alert(event);
         }else{
             //query select di class Database
-            final String query = "SELECT displayTitle, verses FROM places where lower(displayTitle) like '%"+searchBar.getText().toLowerCase()+"%'";       
+            final String query = "SELECT displayTitle,verses,placeLookup FROM places where lower(displayTitle) like '%"+searchBar.getText().toLowerCase()+"%'";       
                     
             //manggil database dan method getAllPlaces
             places = Database.instance.getPlacesgetAllPlaces(query);
