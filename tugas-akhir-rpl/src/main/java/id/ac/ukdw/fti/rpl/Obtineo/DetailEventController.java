@@ -198,9 +198,15 @@ public class DetailEventController implements Initializable {
         }
         
     
-        // for (String string : arrFeatureType) {
-        //     System.out.println(string);
-        // }
+        int lengtPlaceFromEvent = displayTitlePlaces.length();
+        if(lengtPlaceFromEvent>100){
+            for (int i=1;i<=Math.floor(lengtPlaceFromEvent/100);i++){
+                
+                displayTitlePlaces = displayTitlePlaces.substring(0, 100*i+1) +"-\n"+displayTitlePlaces.substring(100*i+1,lengtPlaceFromEvent);
+                
+            }
+        }
+        
         displayTitlePlaces = displayTitlePlaces.join(", ", uniques);
         labelDetail.setText(    "Event: "+selectedItem +"\n\n"+
                                 "Places: "+displayTitlePlaces+"\n\n"+
