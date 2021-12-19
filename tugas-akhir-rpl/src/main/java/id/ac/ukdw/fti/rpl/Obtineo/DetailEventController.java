@@ -12,6 +12,7 @@ import java.util.Set;
 
 import id.ac.ukdw.fti.rpl.Obtineo.database.Database;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
+import id.ac.ukdw.fti.rpl.Obtineo.modal.People;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Places;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Verses;
 import javafx.collections.FXCollections;
@@ -107,7 +108,10 @@ public class DetailEventController implements Initializable {
     private String predecessor;
     private String partOf;
     private String startDate;
+    private String eventPeople;
     private ArrayList<String> arrFeatureType = new ArrayList<String>();
+    private ObservableList<People> peopleFromEvent = FXCollections.observableArrayList();
+
 
 
 
@@ -117,7 +121,7 @@ public class DetailEventController implements Initializable {
         selectedItem = EventController.getSelectedItem();
         selectedItemVerses = EventController.getSelectedItemVerses();
         for (String ayat:selectedItemVerses) {
-            String query = "SELECT osisRef,verseText,yearNum,places,placesCount,timeline  FROM verses where lower(osisRef)='"+ayat.toLowerCase()+"'";
+            String query = "SELECT osisRef,verseText,yearNum,places,placesCount,timeline,people FROM verses where lower(osisRef)='"+ayat.toLowerCase()+"'";
             verses.addAll(Database.instance.getAllVerses(query));
         }
         tableEventVerse.setPlaceholder(new Label("Tidak ada ayat yang ditemukan pada event "+selectedItem));
@@ -129,7 +133,7 @@ public class DetailEventController implements Initializable {
         
         //=========================text====================================
         String replaceTitle = "LOWER(REPLACE(title,\"'\",\" \"))";
-        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where "+replaceTitle+" like '"+selectedItem.toLowerCase().replace("'", " ")+"'";
+        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places, FROM events where "+replaceTitle+" like '"+selectedItem.toLowerCase().replace("'", " ")+"'";
         events = Database.instance.getAllEvents(queryEvent);
         
         // String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where lower(title) like '"+selectedItem.toLowerCase()+"'";
@@ -138,6 +142,7 @@ public class DetailEventController implements Initializable {
         Map<String, String> pair = new HashMap<String, String>();
         for (Events events2 : events) {
             title = events2.getEventTitle();
+            
             if(events2.getPlacesVerses()!=null){
                 placeEvent = events2.getPlacesVerses();
                 String[] placesSplit = placeEvent.split(",");
@@ -194,7 +199,18 @@ public class DetailEventController implements Initializable {
             }else{
                 startDate = "unknown";
             }
-            
+
+            if(events2.getEventPeople()!=null){
+                eventPeople = events2.getEventPeople();
+                String[] peopleSplit = eventPeople.split(",");
+                for (String peopleSplit2 : peopleSplit) {
+                    String queryPeople = "SELECT personLookup,name,gender FROM people where lower(personLookUp)='"+peopleSplit2.toLowerCase()+"'";
+                    peopleFromEvent.addAll(Database.instance.getAllPeople(queryPeople));
+                }
+
+            }else{
+                eventPeople = "unknown";
+            }
         }
         
     
@@ -216,6 +232,13 @@ public class DetailEventController implements Initializable {
                                 "Start Date: "+startDate+"\n\n"
             );
         //=========================text====================================
+
+        //=============================BAR GENDER=======================================
+        
+        
+
+        //=============================BAR GENDER=======================================
+
 
         //~~~~~~~~~~~~~~~~~~timeline~~~~~~~~~~~~~~~~~~~
         // NumberAxis xAxis = new NumberAxis(0, 90, 10);
@@ -281,6 +304,11 @@ public class DetailEventController implements Initializable {
         //DETAIL PIE CHART
 
         // detailPieChart.setText(pair.toString());
+
+
+
+
+
     }
 
     @FXML

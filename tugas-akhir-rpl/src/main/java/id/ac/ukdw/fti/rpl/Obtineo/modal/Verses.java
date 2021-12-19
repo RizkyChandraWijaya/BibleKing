@@ -7,6 +7,8 @@ public class Verses {
     private String places;
     private int placesCount;
     private String timeline;
+    private int peopleCount;
+    private String people;
 
     public void setTimeline(String timeline) {
         this.timeline = timeline;
@@ -54,6 +56,22 @@ public class Verses {
 
     public int getPlacesCount() {
         return this.placesCount;
+    }
+
+    public void setPeopleCount(int peopleCount) {
+        this.peopleCount = peopleCount;
+    }
+
+    public int getPeopleCount() {
+        return this.peopleCount;
+    }
+
+    public void setPeople(String people) {
+        this.people = people;
+    }
+
+    public String getPeople() {
+        return this.people;
     }
 }
 

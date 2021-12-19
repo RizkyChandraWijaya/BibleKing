@@ -8,6 +8,7 @@ public class Events {
     private String partOf;
     private String placesVerses;
     private String predecessor;
+    private String eventPeople;
  
      public void setStartDate(String startDate) {
          this.startDate = startDate;
@@ -34,8 +35,8 @@ public class Events {
 
     public void setVerses(String verses) {
         this.verses = verses;
-     }
-
+    }
+    
     public String getPartOf() {
         return this.partOf;
     }
@@ -62,5 +63,13 @@ public class Events {
 
     public String getVerses() {
         return this.verses;
+    }
+
+    public String getEventPeople() {
+        return this.eventPeople;
+    }
+
+    public void setEventPeople(String eventPeople) {
+        this.eventPeople = eventPeople;
     }
 }

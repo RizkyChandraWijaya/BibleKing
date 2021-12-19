@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
+import id.ac.ukdw.fti.rpl.Obtineo.modal.People;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Places;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Verses;
 import javafx.collections.FXCollections;
@@ -15,6 +16,8 @@ public class Database {
     private ObservableList<Verses> verses = FXCollections.observableArrayList();
     private ObservableList<Events> events = FXCollections.observableArrayList();
     private ObservableList<Places> places = FXCollections.observableArrayList();
+    private ObservableList<People> peoples = FXCollections.observableArrayList();
+
     private Connection connection = null;
     public static Database instance = new Database();
 
@@ -91,5 +94,23 @@ public class Database {
             System.out.println(e.getMessage());
         }
         return places;
+    }
+
+    public ObservableList<People> getAllPeople(String query) {
+        try {
+            peoples.clear();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            while (result.next()) {
+                People people = new People();
+                people.setPersonLookup(result.getString("personLookup"));
+                people.setName(result.getString("name"));
+                people.setGender(result.getString("gender"));
+                peoples.add(people);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return peoples;
     }
 }

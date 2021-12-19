@@ -6,6 +6,7 @@ public class Places {
     private String verses;
     private String featureType;
     private int verseCount;
+    private String placesPeople;
 
     public void setDisplayTitle(String displayTitle) {
        this.displayTitle = displayTitle;
@@ -47,5 +48,12 @@ public class Places {
         return this.featureType;
     }
 
+    public String getPlacesPeople() {
+        return this.placesPeople;
+    }
+
+    public void setPlacesPeople(String placesPeople) {
+        this.placesPeople = placesPeople;
+    }
 
 }
