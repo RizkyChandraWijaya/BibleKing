@@ -68,9 +68,9 @@ public class EventController{
         try {
             String text = versesView.getSelectionModel().getSelectedItem().toString();
             String[] kumpulanAyat = text.split("\n");
-            String[] ayat = kumpulanAyat[1].split(",");
             selectedItem = kumpulanAyat[0];
-
+            String[] ayat = kumpulanAyat[1].split(",");
+            
             for (int i = 0; i < ayat.length; i++) {
                 selectedItemVerses.add(ayat[i].strip());
             }

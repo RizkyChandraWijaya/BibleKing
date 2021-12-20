@@ -295,10 +295,10 @@ public class DetailEventController implements Initializable {
             }
         }
         int popleLength = displayPeople.length();  
-        if(popleLength>30){
-            for (int i=1;i<=Math.floor(popleLength/30);i++){
+        if(popleLength>40){
+            for (int i=1;i<=Math.floor(popleLength/40);i++){
                 
-                displayPeople = displayPeople.substring(0, 30*i+1) +"-\n"+displayPeople.substring(30*i+1,popleLength);
+                displayPeople = displayPeople.substring(0, 40*i+1) +"-\n"+displayPeople.substring(40*i+1,popleLength);
                 
             }
         }
@@ -306,7 +306,7 @@ public class DetailEventController implements Initializable {
 
         //=============================BAR GENDER=======================================
 
-        //PIE CHART BERHASIL
+        //PIE CHART
         Map<String, Integer> counts = new HashMap<String, Integer>(); 
         for (String ft : arrFeatureType) { 
             if (counts.containsKey(ft)) { 
