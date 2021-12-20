@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="PlaceDetailPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.Obtineo.DetailPlaceController">
+<GridPane fx:id="PlaceDetailPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="749.0" prefWidth="961.0" styleClass="background" stylesheets="@bibleking_detail.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.Obtineo.DetailPlaceController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.79998779296875" minWidth="1.6666422128677425" prefWidth="60.19999809265137" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="924.0000122070312" minWidth="10.0" prefWidth="813.0000019073486" />
@@ -35,7 +35,7 @@
       <RowConstraints maxHeight="337.3999923706055" minHeight="10.0" prefHeight="18.133374023437455" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Text fx:id="placeTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="Place Title" wrappingWidth="122.91864013671875" GridPane.columnIndex="1">
+      <Text fx:id="placeTitle" fill="#4b2518" strokeType="OUTSIDE" strokeWidth="0.0" text="Place Title" wrappingWidth="122.91864013671875" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -49,7 +49,7 @@
             <TableColumn fx:id="columnPlaceVerseIsi" minWidth="0.0" prefWidth="673.5999908447266" text="Isi Verse" />
         </columns>
       </TableView>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Text fill="#4b2518" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -65,13 +65,18 @@
             <Insets left="750.0" />
          </GridPane.margin>
       </ImageView>
-      <TabPane fx:id="tabEventDesc" prefHeight="453.0" prefWidth="804.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TabPane fx:id="tabEventDesc" prefHeight="436.0" prefWidth="839.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <tabs>
-          <Tab fx:id="textPlaceDesc" text="Text">
+          <Tab fx:id="textPlaceDesc" text="Summary">
             <content>
               <AnchorPane fx:id="text" minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="490.0">
                      <children>
-                        <Label fx:id="labelDetail" layoutX="14.0" layoutY="14.0" text="Label">
+                        <ScrollPane prefHeight="412.0" prefWidth="804.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                          </content>
+                        </ScrollPane>
+                        <Label fx:id="labelDetail" layoutX="20.0" layoutY="14.0" text="Label">
                            <font>
                               <Font name="Yu Gothic Medium" size="14.0" />
                            </font>
@@ -83,11 +88,15 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane layoutX="34.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <PieChart fx:id="placePieChart" layoutX="54.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" title="Event Duration" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                        </AnchorPane>
+                        <ScrollPane prefHeight="412.0" prefWidth="820.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="807.0">
+                                 <children>
+                                    <PieChart fx:id="placePieChart" layoutX="15.0" layoutY="16.0" prefHeight="388.0" prefWidth="779.0" title="Event Duration" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="16.0" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
                      </children>
                   </AnchorPane>
               </content>
@@ -100,7 +109,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
                                  <children>
-                                    <BarChart fx:id="barPlaces" layoutX="33.0" layoutY="44.0" prefHeight="333.0" prefWidth="493.0" title="People in Places">
+                                    <BarChart layoutX="34.0" layoutY="22.0" prefHeight="362.0" prefWidth="457.0" title="People in Places">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -108,13 +117,10 @@
                                         <NumberAxis prefWidth="0.0" side="LEFT" />
                                       </yAxis>
                                     </BarChart>
-                                    <Label fx:id="detailBarChart" layoutX="636.0" layoutY="44.0" text="Detail">
+                                    <Label fx:id="detailBarChart" layoutX="625.0" layoutY="22.0" text="Detail" />
+                                    <Label fx:id="detailBarChart1" alignment="TOP_LEFT" layoutX="498.0" layoutY="44.0" prefHeight="346.0" prefWidth="294.0" text="Detail">
                                        <font>
-                                          <Font size="15.0" />
-                                       </font></Label>
-                                    <Label fx:id="detailBarChart1" layoutX="575.0" layoutY="79.0" prefHeight="61.0" prefWidth="228.0" text="Detail">
-                                       <font>
-                                          <Font size="15.0" />
+                                          <Font size="10.0" />
                                        </font></Label>
                                  </children>
                               </AnchorPane>

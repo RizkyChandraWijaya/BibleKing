@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="EventDetailPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="874.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.Obtineo.DetailEventController">
+<GridPane fx:id="EventDetailPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="874.0" prefWidth="1017.0" styleClass="background" stylesheets="@bibleking_detail.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.Obtineo.DetailEventController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.79998779296875" minWidth="1.6666422128677425" prefWidth="54.99999809265137" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="924.0000122070312" minWidth="10.0" prefWidth="871.8000019073486" />
@@ -35,7 +35,7 @@
       <RowConstraints maxHeight="337.3999923706055" minHeight="10.0" prefHeight="18.133374023437455" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Text fx:id="eventTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title" GridPane.columnIndex="1">
+      <Text fx:id="eventTitle" fill="#4b2518" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title" GridPane.columnIndex="1">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -45,11 +45,11 @@
       </Text>
       <TableView fx:id="tableEventVerse" onMouseClicked="#detailText" prefHeight="206.0" prefWidth="372.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columns>
-          <TableColumn fx:id="columnEventVerse" prefWidth="129.59999388456345" text="Verse" />
+          <TableColumn fx:id="columnEventVerse" prefWidth="129.59999388456345" styleClass="column-header" text="Verse" />
             <TableColumn fx:id="columnEventVerseIsi" minWidth="0.0" prefWidth="746.9333343505859" text="Isi Verse" />
         </columns>
       </TableView>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Text fill="#4b2518" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -67,14 +67,23 @@
       </ImageView>
       <TabPane fx:id="tabEventDesc" prefHeight="310.0" prefWidth="648.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <tabs>
-          <Tab fx:id="textEventDesc" text="Text">
+          <Tab fx:id="textEventDesc" text="Summary">
             <content>
               <AnchorPane fx:id="text" minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="490.0">
                      <children>
-                        <Label fx:id="labelDetail" layoutX="14.0" layoutY="14.0" text="Label">
-                           <font>
-                              <Font name="Yu Gothic Medium" size="14.0" />
-                           </font></Label>
+                        <ScrollPane prefHeight="485.0" prefWidth="879.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="482.0" prefWidth="878.0">
+                                 <children>
+                                    <Label fx:id="labelDetail" layoutX="29.0" layoutY="23.0" text="Label">
+                                       <font>
+                                          <Font name="Yu Gothic Medium" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -82,17 +91,21 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane layoutX="34.0" layoutY="13.0" prefHeight="449.6" prefWidth="879.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <PieChart fx:id="eventPieChart" layoutX="26.0" layoutY="25.0" prefHeight="438.0" prefWidth="564.0" title="Featured Type of Places" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="289.0" AnchorPane.topAnchor="25.0" />
-                              <Label fx:id="detailPieChart" alignment="TOP_LEFT" layoutX="616.0" layoutY="68.0" prefHeight="390.0" prefWidth="240.0" text="Label" />
-                              <Label layoutX="715.0" layoutY="34.0" text="Detail">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
+                        <ScrollPane prefHeight="484.0" prefWidth="879.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="471.0" prefWidth="879.0">
+                                 <children>
+                                    <PieChart fx:id="eventPieChart" prefHeight="438.0" prefWidth="564.0" title="Featured Type of Places" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="289.0" AnchorPane.topAnchor="25.0" />
+                                    <Label fx:id="detailPieChart" alignment="TOP_LEFT" layoutX="625.0" layoutY="54.0" prefHeight="390.0" prefWidth="240.0" text="Label" />
+                                    <Label layoutX="725.0" layoutY="25.0" text="Detail">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
                      </children>
                   </AnchorPane>
               </content>
@@ -105,7 +118,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
                                  <children>
-                                    <BarChart fx:id="peopleEventBar" layoutX="46.0" layoutY="43.0" prefHeight="386.0" prefWidth="502.0" title="People in Event">
+                                    <BarChart fx:id="peopleEventBar" layoutX="29.0" layoutY="25.0" prefHeight="386.0" prefWidth="502.0" title="People in Event">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -113,8 +126,11 @@
                                         <NumberAxis side="LEFT" />
                                       </yAxis>
                                     </BarChart>
-                                    <Label fx:id="detailBarChart" alignment="TOP_LEFT" layoutX="626.0" layoutY="78.0" prefHeight="390.0" prefWidth="240.0" text="Label" />
-                                    <Label layoutX="725.0" layoutY="44.0" text="Detail">
+                                    <Label fx:id="detailBarChart" alignment="TOP_LEFT" layoutX="560.0" layoutY="53.0" prefHeight="390.0" prefWidth="308.0" text="Label">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font></Label>
+                                    <Label layoutX="694.0" layoutY="25.0" text="Detail">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
