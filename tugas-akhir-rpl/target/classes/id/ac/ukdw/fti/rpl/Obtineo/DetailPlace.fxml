@@ -125,7 +125,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
                                  <children>
-                                    <LineChart fx:id="timelinePlaces" prefHeight="400.0" prefWidth="788.0" title="Timeline">
+                                    <LineChart fx:id="lineChartPlaces" prefHeight="400.0" prefWidth="788.0" title="Timeline">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>

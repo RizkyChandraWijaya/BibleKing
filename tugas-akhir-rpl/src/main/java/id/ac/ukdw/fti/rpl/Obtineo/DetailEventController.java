@@ -271,14 +271,6 @@ public class DetailEventController implements Initializable {
                                 "Start Date: "+startDate+"\n\n"
             );
         //=========================text====================================
-
-        //=============================BAR GENDER=======================================
-        
-        
-
-        //=============================BAR GENDER=======================================
-
-
         //~~~~~~~~~~~~~~~~~~timeline~~~~~~~~~~~~~~~~~~~
         // NumberAxis xAxis = new NumberAxis(0, 90, 10);
         // NumberAxis yAxis = new NumberAxis(20, 90, 10);

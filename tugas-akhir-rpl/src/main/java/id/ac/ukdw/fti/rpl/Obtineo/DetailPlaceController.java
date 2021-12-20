@@ -79,23 +79,14 @@ public class DetailPlaceController implements Initializable{
     @FXML
     private Tab graphPlaceDesc;
 
-    // @FXML
-    // private ScatterChart<String,Number> chartEvent;
+    @FXML
+    private ScatterChart<String,Number> chartEvent;
 
     @FXML
     private ImageView btnBackPlace;
 
     @FXML
-    private Tab peoplePlace;
-
-    @FXML
-    private Label detailBarChart;
-
-    @FXML
-    private Label detailBarChart1;
-
-    @FXML
-    private LineChart<String,Number> timelinePlaces;
+    private LineChart<String,Number> lineChartPlaces;
 
     private ObservableList<Verses> verses = FXCollections.observableArrayList();
     private ObservableList<Places> places = FXCollections.observableArrayList();
@@ -106,14 +97,16 @@ public class DetailPlaceController implements Initializable{
     private String featureType;
     private String eventVerses = "";
     private String duration;
-    private String timeline;
-    private String yearNum;
-    private int newDuration;
     private String startDate;
     private String title;
+    private String timeline;
+    private String yearNum;
+    ArrayList<String[]> arrTimeline1;
+    ArrayList<String> arrTimeline;
+    int newDuration;
     private ArrayList<Integer> arrDuration = new ArrayList<Integer>();
     Map<String, Integer> durationMap = new HashMap<String, Integer>();
-    ArrayList<String[]> arrTimeline;
+    XYChart.Series series = new XYChart.Series();
 
 
     //yang dijalankan pertama kali
@@ -140,6 +133,7 @@ public class DetailPlaceController implements Initializable{
         String replaceTitle = "LOWER(REPLACE(displayTitle,\"'\",\" \"))";
         String queryPlace = "SELECT placeLookup,displayTitle,verses,featureType,verseCount FROM places where "+replaceTitle+" like '"+selectedItem.toLowerCase().replace("'", " ")+"'";
         places = Database.instance.getAllPlaces(queryPlace);
+        series.getData().clear();
 
         for (Places places2 : places) {
 
@@ -159,7 +153,7 @@ public class DetailPlaceController implements Initializable{
                 for (Verses verses2 : verses) {
                     if(verses2.getTimeline()!=null){
                         String replaceEventTitle = "LOWER(REPLACE(title,\"'\",\" \"))";
-                        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,peoples,places FROM events where "+replaceEventTitle+" like '"+verses2.getTimeline().toLowerCase().replace("'", " ")+"'";
+                        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places,peoples FROM events where "+replaceEventTitle+" like '"+verses2.getTimeline().toLowerCase().replace("'", " ")+"'";
                         events = Database.instance.getAllEvents(queryEvent);
                         for(Events events2 : events ){
                             duration = events2.getDuration();
@@ -172,20 +166,38 @@ public class DetailPlaceController implements Initializable{
                                 }else if(duration2.equals("Y")){
                                     newDuration = Integer.parseInt(duration.substring(0,duration.length()-1))*365;
                                 }
-                            arrDuration.add(newDuration);
-                            }
-                            // startDate = events2.getStartDate();
-                            // title = events2.getEventTitle();
-                            // if(startDate !=null){
-                            //     if(title != null){
-                            //         String[] arrDate = {startDate,title};
-                            //         arrTimeline.add(arrDate);
-                            //     }
-                                
-                            // } 
-                            
-                            
+                            arrDuration.add(newDuration); 
+//================================================TIMELINE=================================================================
+                            startDate = events2.getStartDate();
+                            title = events2.getEventTitle();
+
+                            if(startDate != null){
+                                if(title != null){
+                                    System.out.println("ini start date "+startDate);
+                                    System.out.println("ini title "+title);
+                                    System.out.println(" ");
+                                    int year = Integer.parseInt(startDate); 
+                                    series.getData().add(new XYChart.Data(title,year));
+                                }else{
+                                    title = "unknown";
+                                    System.out.println("ini title "+title);
+                                    System.out.println("ini start date "+startDate);
+                                    int year = Integer.parseInt(startDate); 
+                                    series.getData().add(new XYChart.Data(title,year));
+                                }  
+                            }else{
+                                startDate = "unknown";
+                                System.out.println("ini start date "+startDate);
+                                if(title !=null){
+                                    System.out.println("ini title "+title);
+                                }else{
+                                    title = "unknown";
+                                    System.out.println("ini title "+title);
+                                }   
+                            }  
+                            }   
                         }
+                        
                         if(verses.indexOf(verses2)==verses.size()-1){
                             eventVerses = eventVerses + verses2.getTimeline();
                             
@@ -199,6 +211,8 @@ public class DetailPlaceController implements Initializable{
             }  
             
         }
+        lineChartPlaces.getData().addAll(series);
+//================================================TIMELINE=================================================================
 
         
         int eventVerseLenght = eventVerses.length();
@@ -216,51 +230,6 @@ public class DetailPlaceController implements Initializable{
 
         //==============================text=================================
 
-
-        //timeline
-        // XYChart.Series series = new XYChart.Series();
-        // System.out.println("BISA NGGAKKKKKKKKKKKKKK");
-        // if(arrTimeline.size()>0){
-        //     for (int k = 0; k<arrTimeline.size();k++) {
-        //         System.out.println(arrTimeline.get(k));
-        //         for(int m = 0; m<2;m++){
-        //             arrTimeline.get(k);
-                    
-        //         }
-        //     }
-        // }
-        
-
-
-        //     timeline = verse.getTimeline();
-        //     yearNum = verse.getYearNum();
-        //     if(timeline!=null) {
-        //         System.out.println(timeline+" dan tahun "+yearNum);
-        //         String[] arrTimeline1 = timeline.split(",");
-        //         int timelineCount = arrTimeline1.length;
-        //         arrTimeline.clear();
-        //         for(int j=0; j<timelineCount;j++){
-        //             arrTimeline.add(arrTimeline1[j]);
-        //         }
-                
-        //         String[] arrTimelineBaru = (String[]) arrTimeline.toArray();
-                
-        //         if(yearNum!=null){
-        //             int year = Integer.parseInt(yearNum);  
-        //             for(int i = 0; i < timelineCount; i++){
-        //                 series.getData().add(new XYChart.Data(arrTimelineBaru[i],year));
-        //             }
-        //         }else{
-        //             for(int i = 0; i < timelineCount; i++){
-        //                 series.getData().add(new XYChart.Data(arrTimelineBaru[i],0));
-        //             }
-        //         }
-        //     }
-            
-        // }
-        // timelinePlaces.getData().addAll(series);
-
-        
         //==============Pie Chart=====================
         Map<String, Integer> counts = new HashMap<String, Integer>();
         String[] arrEvent = eventVerses.split(", ");
@@ -285,7 +254,6 @@ public class DetailPlaceController implements Initializable{
             list.add(new PieChart.Data(arrEvent1.get(i),arrDuration1.get(i)));
         }
         placePieChart.setData(list);
-    // System.out.println(list);
     }
 
     //pindah ke halaman searchingPlaces
