@@ -2,9 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.chart.ScatterChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
@@ -104,14 +104,14 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
                                  <children>
-                                    <ScatterChart fx:id="chartEvent" prefHeight="434.0" prefWidth="860.0" title="Time Line" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="0.0">
+                                    <LineChart fx:id="timeline" axisSortingPolicy="NONE" layoutX="14.0" layoutY="14.0" legendVisible="false" prefHeight="427.0" prefWidth="834.0" title="Timeline">
                                       <xAxis>
-                                        <CategoryAxis label="Places" side="BOTTOM" />
+                                        <CategoryAxis side="BOTTOM" />
                                       </xAxis>
                                       <yAxis>
-                                        <NumberAxis forceZeroInRange="false" label="Years" side="LEFT" upperBound="500.0" />
+                                        <NumberAxis side="LEFT" />
                                       </yAxis>
-                                    </ScatterChart>
+                                    </LineChart>
                                  </children>
                               </AnchorPane>
                           </content>

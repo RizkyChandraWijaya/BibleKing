@@ -43,7 +43,7 @@ public class EventController{
         if(searchBar.getText().isEmpty()){
             alert(event);
         }else{
-            final String query = "SELECT title, verseSort, verses, startDate, duration, predecessor, partOf, places FROM events where lower(title) like '%"+searchBar.getText().toLowerCase()+"%'";
+            final String query = "SELECT title, verseSort, verses, startDate, duration, predecessor, partOf, places, peoples FROM events where lower(title) like '%"+searchBar.getText().toLowerCase()+"%'";
             events = Database.instance.getAllEvents(query);
             for (Events events2 : events) {
                 listItem.add(events2.getEventTitle()+"\n"+events2.getVerses());

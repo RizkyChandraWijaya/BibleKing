@@ -41,6 +41,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.chart.LineChart;
 
 public class DetailEventController implements Initializable {
     @FXML
@@ -91,6 +92,9 @@ public class DetailEventController implements Initializable {
     @FXML
     private Label labelDetail;
 
+    @FXML
+    private LineChart<String, Number> timeline;
+
     private Stage stage;
     private Scene scene;
     private ObservableList<Verses> verses = FXCollections.observableArrayList();
@@ -133,7 +137,7 @@ public class DetailEventController implements Initializable {
         
         //=========================text====================================
         String replaceTitle = "LOWER(REPLACE(title,\"'\",\" \"))";
-        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places, FROM events where "+replaceTitle+" like '"+selectedItem.toLowerCase().replace("'", " ")+"'";
+        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places,peoples FROM events where "+replaceTitle+" like '"+selectedItem.toLowerCase().replace("'", " ")+"'";
         events = Database.instance.getAllEvents(queryEvent);
         
         // String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where lower(title) like '"+selectedItem.toLowerCase()+"'";
@@ -252,7 +256,8 @@ public class DetailEventController implements Initializable {
 
             if(places!=null) {
                 int placeCount = verse.getPlacesCount();
-                String[] arrPlaces = places.split(",");
+                String[] arrPlaces = places.split(","); 
+                System.out.println(arrPlaces.toString());
                 if(yearNum!=null){
                     int year = Integer.parseInt(yearNum);  
                     for(int i = 0; i < placeCount; i++){
@@ -271,7 +276,7 @@ public class DetailEventController implements Initializable {
             
         }
 
-        chartEvent.getData().addAll(series);
+        timeline.getData().addAll(series);
 
         //PIE CHART
         Map<String, Integer> counts = new HashMap<String, Integer>(); 

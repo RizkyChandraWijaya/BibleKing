@@ -67,6 +67,7 @@ public class Database {
                 event.setPredecessor(result.getString("predecessor"));
                 event.setPartOf(result.getString("partOf"));
                 event.setStartDate(result.getString("startDate"));
+                event.setEventPeople(result.getString("peoples"));
                 events.add(event);
             }
         } catch (Exception e) {
