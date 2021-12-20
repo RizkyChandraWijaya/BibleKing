@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import id.ac.ukdw.fti.rpl.Obtineo.database.Database;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
@@ -41,6 +43,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 
 public class DetailEventController implements Initializable {
@@ -73,6 +76,16 @@ public class DetailEventController implements Initializable {
 
     @FXML
     private PieChart eventPieChart = new PieChart();
+
+    @FXML
+    private Tab peopleEvent;
+
+    @FXML
+    private BarChart peopleEventBar;
+
+    @FXML
+    private Label detailBarChart;
+
 
     @FXML
     private Tab graphEventDesc;
@@ -114,6 +127,7 @@ public class DetailEventController implements Initializable {
     private String startDate;
     private String eventPeople;
     private ArrayList<String> arrFeatureType = new ArrayList<String>();
+    private ArrayList<String> arrGender = new ArrayList<String>();
     private ObservableList<People> peopleFromEvent = FXCollections.observableArrayList();
 
 
@@ -143,6 +157,9 @@ public class DetailEventController implements Initializable {
         // String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where lower(title) like '"+selectedItem.toLowerCase()+"'";
         // events = Database.instance.getAllEvents(queryEvent);
         Set<String> uniques = new HashSet<String>();
+        Set<String[]> uniquesPeople = new HashSet<String[]>();
+
+        
         Map<String, String> pair = new HashMap<String, String>();
         for (Events events2 : events) {
             title = events2.getEventTitle();
@@ -215,6 +232,29 @@ public class DetailEventController implements Initializable {
             }else{
                 eventPeople = "unknown";
             }
+
+            //perulangan untuk akses people from event
+            for (People people2:peopleFromEvent){
+                if(people2.getName()!=null){
+                    if(peopleFromEvent.indexOf(people2)==peopleFromEvent.size()-1){
+                        String[] peoplegender = {people2.getName(),people2.getGender()};
+                        uniquesPeople.add(peoplegender);
+                        arrGender.add(people2.getGender());
+
+                    }else{
+                        String[] peoplegender = {people2.getName(),people2.getGender()};
+                        uniquesPeople.add(peoplegender);
+                        arrGender.add(people2.getGender());
+                    }
+                }
+            }
+
+            ArrayList<String[]> people_array = (ArrayList<String[]>)uniquesPeople.stream().collect(Collectors.toList());
+        
+            //Mengubah people_array peoplegender untuk dapat array gender
+            
+
+
         }
         
     
@@ -277,6 +317,33 @@ public class DetailEventController implements Initializable {
         }
 
         timeline.getData().addAll(series);
+
+
+        //=============================BAR GENDER=======================================
+                
+
+        
+        Map<String, Integer> countsBar = new HashMap<String, Integer>(); 
+        Integer countFemale= Collections.frequency(arrGender, "Female");
+        Integer countMale= Collections.frequency(arrGender, "Male");
+        System.out.println(countFemale+" dan "+countMale);
+        System.out.println(uniquesPeople+" dan "+arrGender);
+        XYChart.Series dataPeople = new XYChart.Series<>();
+        dataPeople.setName(eventTitle.toString());
+        dataPeople.getData().add(new XYChart.Data("Female",countFemale));
+        dataPeople.getData().add(new XYChart.Data("Male",countMale));
+
+        peopleEventBar.getData().add(dataPeople);
+
+
+
+
+
+
+        //=============================BAR GENDER=======================================
+
+
+
 
         //PIE CHART
         Map<String, Integer> counts = new HashMap<String, Integer>(); 

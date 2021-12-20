@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -96,6 +97,36 @@
                   </AnchorPane>
               </content>
             </Tab>
+            <Tab fx:id="peopleEvent" text="People">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="449.6" prefWidth="879.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
+                                 <children>
+                                    <BarChart fx:id="peopleEventBar" layoutX="46.0" layoutY="43.0" prefHeight="386.0" prefWidth="502.0" title="People in Event">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
+                                    <Label fx:id="detailBarChart" alignment="TOP_LEFT" layoutX="626.0" layoutY="78.0" prefHeight="390.0" prefWidth="240.0" text="Label" />
+                                    <Label layoutX="725.0" layoutY="44.0" text="Detail">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
           <Tab fx:id="graphEventDesc" text="TimeLine">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -104,7 +135,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
                                  <children>
-                                    <LineChart fx:id="timeline" axisSortingPolicy="NONE" layoutX="14.0" layoutY="14.0" legendVisible="false" prefHeight="427.0" prefWidth="834.0" title="Timeline">
+                                    <LineChart fx:id="timeline" axisSortingPolicy="Y_AXIS" layoutX="11.0" layoutY="26.0" prefHeight="415.0" prefWidth="859.0" title="Timeline">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
