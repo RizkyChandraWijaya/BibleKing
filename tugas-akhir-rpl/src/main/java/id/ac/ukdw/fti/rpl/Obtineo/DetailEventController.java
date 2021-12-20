@@ -157,7 +157,7 @@ public class DetailEventController implements Initializable {
         // String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where lower(title) like '"+selectedItem.toLowerCase()+"'";
         // events = Database.instance.getAllEvents(queryEvent);
         Set<String> uniques = new HashSet<String>();
-        Set<String[]> uniquesPeople = new HashSet<String[]>();
+        Set<String> uniquesPeople = new HashSet<String>();
 
         
         Map<String, String> pair = new HashMap<String, String>();
@@ -237,22 +237,18 @@ public class DetailEventController implements Initializable {
             for (People people2:peopleFromEvent){
                 if(people2.getName()!=null){
                     if(peopleFromEvent.indexOf(people2)==peopleFromEvent.size()-1){
-                        String[] peoplegender = {people2.getName(),people2.getGender()};
-                        uniquesPeople.add(peoplegender);
-                        arrGender.add(people2.getGender());
-
+                        if(!uniquesPeople.contains(people2.getName())){
+                            uniquesPeople.add(people2.getName());
+                            arrGender.add(people2.getGender());
+                        }
                     }else{
-                        String[] peoplegender = {people2.getName(),people2.getGender()};
-                        uniquesPeople.add(peoplegender);
-                        arrGender.add(people2.getGender());
+                        if(!uniquesPeople.contains(people2.getName())){
+                            uniquesPeople.add(people2.getName());
+                            arrGender.add(people2.getGender());
+                        }
                     }
                 }
             }
-
-            ArrayList<String[]> people_array = (ArrayList<String[]>)uniquesPeople.stream().collect(Collectors.toList());
-        
-            //Mengubah people_array peoplegender untuk dapat array gender
-            
 
 
         }
@@ -329,13 +325,13 @@ public class DetailEventController implements Initializable {
         System.out.println(countFemale+" dan "+countMale);
         System.out.println(uniquesPeople+" dan "+arrGender);
         XYChart.Series dataPeople = new XYChart.Series<>();
-        dataPeople.setName(eventTitle.toString());
+        dataPeople.setName(selectedItem);
         dataPeople.getData().add(new XYChart.Data("Female",countFemale));
         dataPeople.getData().add(new XYChart.Data("Male",countMale));
 
         peopleEventBar.getData().add(dataPeople);
 
-
+        detailBarChart.setText(uniquesPeople.toString());
 
 
 
