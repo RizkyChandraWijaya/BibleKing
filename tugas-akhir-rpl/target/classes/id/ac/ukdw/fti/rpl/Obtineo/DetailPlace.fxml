@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.chart.ScatterChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
@@ -91,7 +92,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-          <Tab fx:id="graphPlaceDesc" text="TimeLine">
+          <Tab fx:id="peoplePlace" text="People in Places">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -99,14 +100,16 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
                                  <children>
-                                    <ScatterChart fx:id="chartEvent" layoutY="-7.0" prefHeight="417.0" prefWidth="804.0" title="Time Line" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="-7.0">
+                                    <BarChart layoutX="14.0" prefHeight="397.0" prefWidth="774.0" title="People in Places">
                                       <xAxis>
-                                        <CategoryAxis label="Places" side="BOTTOM" />
+                                        <CategoryAxis side="BOTTOM" />
                                       </xAxis>
                                       <yAxis>
-                                        <NumberAxis forceZeroInRange="false" label="Years" side="LEFT" upperBound="500.0" />
+                                        <NumberAxis prefWidth="0.0" side="LEFT" />
                                       </yAxis>
-                                    </ScatterChart>
+                                    </BarChart>
+                                    <Label fx:id="detailBarChart" layoutX="636.0" layoutY="44.0" text="Label" />
+                                    <Label fx:id="detailBarChart1" layoutX="550.0" layoutY="79.0" prefHeight="283.0" prefWidth="228.0" text="Detail" />
                                  </children>
                               </AnchorPane>
                           </content>
@@ -114,6 +117,30 @@
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab fx:id="timelinePlaces" text="TimeLine">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="449.6" prefWidth="879.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
+                                 <children>
+                                    <LineChart fx:id="timelinePlaces" prefHeight="400.0" prefWidth="788.0" title="Timeline">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </LineChart>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
       <ImageView fx:id="btnBackPlace" fitHeight="29.0" fitWidth="36.0" onMouseClicked="#backBtn" pickOnBounds="true" preserveRatio="true">

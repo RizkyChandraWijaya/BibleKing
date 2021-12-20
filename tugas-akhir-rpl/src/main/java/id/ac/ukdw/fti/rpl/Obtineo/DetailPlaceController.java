@@ -21,8 +21,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -77,11 +79,23 @@ public class DetailPlaceController implements Initializable{
     @FXML
     private Tab graphPlaceDesc;
 
-    @FXML
-    private ScatterChart<String,Number> chartEvent;
+    // @FXML
+    // private ScatterChart<String,Number> chartEvent;
 
     @FXML
     private ImageView btnBackPlace;
+
+    @FXML
+    private Tab peoplePlace;
+
+    @FXML
+    private Label detailBarChart;
+
+    @FXML
+    private Label detailBarChart1;
+
+    @FXML
+    private LineChart<String,Number> timelinePlaces;
 
     private ObservableList<Verses> verses = FXCollections.observableArrayList();
     private ObservableList<Places> places = FXCollections.observableArrayList();
@@ -92,9 +106,14 @@ public class DetailPlaceController implements Initializable{
     private String featureType;
     private String eventVerses = "";
     private String duration;
-    int newDuration;
+    private String timeline;
+    private String yearNum;
+    private int newDuration;
+    private String startDate;
+    private String title;
     private ArrayList<Integer> arrDuration = new ArrayList<Integer>();
     Map<String, Integer> durationMap = new HashMap<String, Integer>();
+    ArrayList<String[]> arrTimeline;
 
 
     //yang dijalankan pertama kali
@@ -140,7 +159,7 @@ public class DetailPlaceController implements Initializable{
                 for (Verses verses2 : verses) {
                     if(verses2.getTimeline()!=null){
                         String replaceEventTitle = "LOWER(REPLACE(title,\"'\",\" \"))";
-                        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where "+replaceEventTitle+" like '"+verses2.getTimeline().toLowerCase().replace("'", " ")+"'";
+                        String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,peoples,places FROM events where "+replaceEventTitle+" like '"+verses2.getTimeline().toLowerCase().replace("'", " ")+"'";
                         events = Database.instance.getAllEvents(queryEvent);
                         for(Events events2 : events ){
                             duration = events2.getDuration();
@@ -153,10 +172,18 @@ public class DetailPlaceController implements Initializable{
                                 }else if(duration2.equals("Y")){
                                     newDuration = Integer.parseInt(duration.substring(0,duration.length()-1))*365;
                                 }
-                            arrDuration.add(newDuration); 
-                                
-                               
+                            arrDuration.add(newDuration);
                             }
+                            // startDate = events2.getStartDate();
+                            // title = events2.getEventTitle();
+                            // if(startDate !=null){
+                            //     if(title != null){
+                            //         String[] arrDate = {startDate,title};
+                            //         arrTimeline.add(arrDate);
+                            //     }
+                                
+                            // } 
+                            
                             
                         }
                         if(verses.indexOf(verses2)==verses.size()-1){
@@ -189,6 +216,51 @@ public class DetailPlaceController implements Initializable{
 
         //==============================text=================================
 
+
+        //timeline
+        // XYChart.Series series = new XYChart.Series();
+        // System.out.println("BISA NGGAKKKKKKKKKKKKKK");
+        // if(arrTimeline.size()>0){
+        //     for (int k = 0; k<arrTimeline.size();k++) {
+        //         System.out.println(arrTimeline.get(k));
+        //         for(int m = 0; m<2;m++){
+        //             arrTimeline.get(k);
+                    
+        //         }
+        //     }
+        // }
+        
+
+
+        //     timeline = verse.getTimeline();
+        //     yearNum = verse.getYearNum();
+        //     if(timeline!=null) {
+        //         System.out.println(timeline+" dan tahun "+yearNum);
+        //         String[] arrTimeline1 = timeline.split(",");
+        //         int timelineCount = arrTimeline1.length;
+        //         arrTimeline.clear();
+        //         for(int j=0; j<timelineCount;j++){
+        //             arrTimeline.add(arrTimeline1[j]);
+        //         }
+                
+        //         String[] arrTimelineBaru = (String[]) arrTimeline.toArray();
+                
+        //         if(yearNum!=null){
+        //             int year = Integer.parseInt(yearNum);  
+        //             for(int i = 0; i < timelineCount; i++){
+        //                 series.getData().add(new XYChart.Data(arrTimelineBaru[i],year));
+        //             }
+        //         }else{
+        //             for(int i = 0; i < timelineCount; i++){
+        //                 series.getData().add(new XYChart.Data(arrTimelineBaru[i],0));
+        //             }
+        //         }
+        //     }
+            
+        // }
+        // timelinePlaces.getData().addAll(series);
+
+        
         //==============Pie Chart=====================
         Map<String, Integer> counts = new HashMap<String, Integer>();
         String[] arrEvent = eventVerses.split(", ");
@@ -215,36 +287,6 @@ public class DetailPlaceController implements Initializable{
         placePieChart.setData(list);
     // System.out.println(list);
     }
-
-    
-    
-
-//     for (String ft : arrFeatureType) { 
-//         if (counts.containsKey(ft)) { 
-//             counts.put(ft, counts.get(ft) + 1); 
-//         } else { 
-//             counts.put(ft, 1); 
-//         } 
-//     } 
-    
-//     ArrayList<String> arrNameFt = new ArrayList<String>();
-//     ArrayList<Integer> arrCountFt = new ArrayList<Integer>();
-    
-//     for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-//         // System.out.println(entry.getKey()+" "+entry.getValue());
-//         arrNameFt.add(entry.getKey());
-//         arrCountFt.add(entry.getValue());
-//     }
-    
-//     ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
-//     for(int i=0;i<arrNameFt.size(); i++){
-//         list.add(new PieChart.Data(arrNameFt.get(i),arrCountFt.get(i)));
-//         }
-//     // System.out.println(list);
-    
-//     eventPieChart.setData(list);
-
-// }
 
     //pindah ke halaman searchingPlaces
     @FXML
