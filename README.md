@@ -11,4 +11,4 @@ SS Search Page Bible King apps:
 ![searchPage](https://user-images.githubusercontent.com/89894989/140635745-f71bb2fa-648d-4e0a-8724-626c10a334a5.JPG)
 
 SS Detail Page Bible King apps:
-![Detail](https://user-images.githubusercontent.com/89894989/140635748-e250ade9-df27-4710-beea-c9613790b7ab.JPG)
+![details](https://user-images.githubusercontent.com/89894989/146804453-0a2f6268-65be-41b6-bb19-d2eed780c7c4.JPG)
