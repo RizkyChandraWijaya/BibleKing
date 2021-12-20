@@ -39,6 +39,8 @@ public class PlaceController{
     
     @FXML
     void searchPlaces(ActionEvent event) {
+        places.clear();
+        listPlaces.clear();
         if(searchBar.getText().isEmpty()){
             alert(event);
         }else{

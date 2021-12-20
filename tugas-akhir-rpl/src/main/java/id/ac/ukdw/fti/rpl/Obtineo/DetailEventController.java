@@ -324,7 +324,7 @@ public class DetailEventController implements Initializable {
         
         ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
         for(int i=0;i<arrNameFt.size(); i++){
-            list.add(new PieChart.Data(arrNameFt.get(i),arrCountFt.get(i)));
+            list.add(new PieChart.Data(arrNameFt.get(i)+" : "+(arrCountFt.get(i).toString()),arrCountFt.get(i)));
             }    
         eventPieChart.setData(list);
 

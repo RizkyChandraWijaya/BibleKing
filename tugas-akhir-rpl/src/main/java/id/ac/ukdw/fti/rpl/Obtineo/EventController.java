@@ -39,6 +39,8 @@ public class EventController{
     
     @FXML
     void searchEvent(ActionEvent event) {
+        events.clear();
+        listItem.clear();
         if(searchBar.getText().isEmpty()){
             alert(event);
         }else{
