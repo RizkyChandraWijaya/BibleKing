@@ -112,6 +112,7 @@ public class DetailEventController implements Initializable {
     private String displayTitlePlaces = "";
     private String featureTypePlaces = "";
     private String displayPeople = "";
+    private String displayFeature = "";
     private String title;
     private String placeEvent;
     private String duration;
@@ -268,13 +269,6 @@ public class DetailEventController implements Initializable {
                     for(int i = 0; i < placeCount; i++){
                         series.getData().add(new XYChart.Data(arrPlaces[i],year));
                     }
-                    // series.getData().add(new XYChart.Data(place,yearNum)); 
-                }else{
-                    // int tahun=Integer.parseInt(yearNum);
-                    // series.getData().add(new XYChart.Data("place",0));
-                    for(int i = 0; i < placeCount; i++){
-                        series.getData().add(new XYChart.Data(arrPlaces[i],0));
-                    }
                 }
             }
         }
@@ -289,13 +283,15 @@ public class DetailEventController implements Initializable {
         dataPeople.getData().add(new XYChart.Data("Male",countMale));
         peopleEventBar.getData().add(dataPeople);
 
-        String[] arrUniquePeople = uniques.toArray(new String[uniquesPeople.size()]);
+        String[] arrUniquePeople = uniquesPeople.toArray(new String[uniquesPeople.size()]);
 
         for(int n = 0; n<arrUniquePeople.length;n++){
-            if(arrUniquePeople[n] == arrUniquePeople[arrUniquePeople.length-1]){
-                displayPeople += arrUniquePeople[n];   
-            }else{
-                displayPeople += arrUniquePeople[n] + ", ";    
+            if(arrUniquePeople[n]!=null){
+                if(arrUniquePeople[n] == arrUniquePeople[arrUniquePeople.length-1]){
+                    displayPeople += arrUniquePeople[n];   
+                }else{
+                    displayPeople += arrUniquePeople[n] + ", ";    
+                }
             }
         }
         int popleLength = displayPeople.length();  
@@ -331,9 +327,26 @@ public class DetailEventController implements Initializable {
             list.add(new PieChart.Data(arrNameFt.get(i),arrCountFt.get(i)));
             }    
         eventPieChart.setData(list);
-        //DETAIL PIE CHART
 
-        detailPieChart.setText(uniques.toString());
+        //DETAIL PIE CHART
+        String[] arrFeature = uniques.toArray(new String[uniques.size()]);
+
+        for(int n = 0; n<arrFeature.length;n++){
+            if(arrFeature[n]!=null){
+                if(arrFeature[n] == arrFeature[arrFeature.length-1]){
+                    displayFeature += arrFeature[n];   
+                }else{
+                    displayFeature += arrFeature[n] + ", ";    
+                }
+            }
+        }
+        int featureLength = displayFeature.length();  
+        if(featureLength>40){
+            for (int i=1;i<=Math.floor(featureLength/40);i++){
+                displayFeature = displayFeature.substring(0, 40*i+1) +"-\n"+displayFeature.substring(40*i+1,featureLength);
+            }
+        }
+        detailPieChart.setText(displayFeature);
     }
 
     @FXML

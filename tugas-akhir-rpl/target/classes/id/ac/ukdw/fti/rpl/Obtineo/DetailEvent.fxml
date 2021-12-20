@@ -95,8 +95,8 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="471.0" prefWidth="879.0">
                                  <children>
-                                    <PieChart fx:id="eventPieChart" prefHeight="438.0" prefWidth="564.0" title="Featured Type of Places" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="289.0" AnchorPane.topAnchor="25.0" />
-                                    <Label fx:id="detailPieChart" alignment="TOP_LEFT" layoutX="625.0" layoutY="54.0" prefHeight="390.0" prefWidth="240.0" text="Label" />
+                                    <PieChart fx:id="eventPieChart" prefHeight="426.0" prefWidth="509.0" title="Featured Type of Places" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="344.0" AnchorPane.topAnchor="25.0" />
+                                    <Label fx:id="detailPieChart" alignment="TOP_LEFT" layoutX="567.0" layoutY="54.0" prefHeight="390.0" prefWidth="298.0" text="Label" />
                                     <Label layoutX="725.0" layoutY="25.0" text="Detail">
                                        <font>
                                           <Font size="15.0" />

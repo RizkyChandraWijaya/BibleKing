@@ -24,7 +24,6 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
-import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -272,18 +271,20 @@ public class DetailPlaceController implements Initializable{
         String[] arrUniquePeople = uniques.toArray(new String[uniquesPeople.size()]);
 
         for(int n = 0; n<arrUniquePeople.length;n++){
-            if(arrUniquePeople[n] == arrUniquePeople[arrUniquePeople.length-1]){
-                displayPeople += arrUniquePeople[n];   
-            }else{
-                displayPeople += arrUniquePeople[n] + ", ";    
+            if(arrUniquePeople[n]!=null){
+                if(arrUniquePeople[n] == arrUniquePeople[arrUniquePeople.length-1]){
+                    displayPeople += arrUniquePeople[n];   
+                }else{
+                    displayPeople += arrUniquePeople[n] + ", ";    
+                }
             }
         }
         int popleLength = displayPeople.length();
         
-        if(popleLength>30){
-            for (int i=1;i<=Math.floor(popleLength/30);i++){
+        if(popleLength>40){
+            for (int i=1;i<=Math.floor(popleLength/40);i++){
                 
-                displayPeople = displayPeople.substring(0, 30*i+1) +"-\n"+displayPeople.substring(30*i+1,popleLength);
+                displayPeople = displayPeople.substring(0, 40*i+1) +"-\n"+displayPeople.substring(40*i+1,popleLength);
                 
             }
         }

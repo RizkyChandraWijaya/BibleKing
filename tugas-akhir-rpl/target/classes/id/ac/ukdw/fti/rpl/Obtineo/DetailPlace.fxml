@@ -109,7 +109,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
                                  <children>
-                                    <BarChart layoutX="34.0" layoutY="22.0" prefHeight="362.0" prefWidth="457.0" title="People in Places">
+                                    <BarChart fx:id="barPlaces" layoutX="34.0" layoutY="22.0" prefHeight="362.0" prefWidth="457.0" title="People in Places">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
