@@ -44,6 +44,7 @@ public class Database {
                 verse.setPlaces(result.getString("places"));
                 verse.setPlacesCount(result.getInt("placesCount"));
                 verse.setTimeline(result.getString("timeline"));
+                verse.setPeople(result.getString("people"));
                 verses.add(verse);
             }
         } catch (Exception e) {

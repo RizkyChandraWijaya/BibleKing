@@ -3,15 +3,19 @@ package id.ac.ukdw.fti.rpl.Obtineo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import id.ac.ukdw.fti.rpl.Obtineo.database.Database;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
+import id.ac.ukdw.fti.rpl.Obtineo.modal.People;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Places;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Verses;
 import javafx.collections.FXCollections;
@@ -21,6 +25,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
@@ -88,6 +93,12 @@ public class DetailPlaceController implements Initializable{
     @FXML
     private LineChart<String,Number> lineChartPlaces;
 
+    @FXML
+    private BarChart barPlaces;
+
+    @FXML
+    private Label detailBarChart1;
+
     private ObservableList<Verses> verses = FXCollections.observableArrayList();
     private ObservableList<Places> places = FXCollections.observableArrayList();
     private ObservableList<Events> events = FXCollections.observableArrayList();
@@ -100,12 +111,14 @@ public class DetailPlaceController implements Initializable{
     private String startDate;
     private String title;
     private String timeline;
-    private String yearNum;
+    private String placesPeople;
     ArrayList<String[]> arrTimeline1;
     ArrayList<String> arrTimeline;
     int newDuration;
     private ArrayList<Integer> arrDuration = new ArrayList<Integer>();
     Map<String, Integer> durationMap = new HashMap<String, Integer>();
+    private ArrayList<String> arrGender = new ArrayList<String>();
+    private ObservableList<People> peopleFromPlaces = FXCollections.observableArrayList();
     XYChart.Series series = new XYChart.Series();
 
 
@@ -118,7 +131,7 @@ public class DetailPlaceController implements Initializable{
 
         //perulangan untuk menampilkan seluruh ayat yang ada di list ke table
         for (String ayat:selectedItemVerses) {
-            String query = "SELECT osisRef, verseText,yearNum,places,placesCount,timeline FROM verses where lower(osisRef)='"+ayat.toLowerCase()+"'";
+            String query = "SELECT osisRef, verseText,yearNum,places,placesCount,timeline,people FROM verses where lower(osisRef)='"+ayat.toLowerCase()+"'";
             verses.addAll(Database.instance.getAllVerses(query));
         }
         
@@ -133,6 +146,7 @@ public class DetailPlaceController implements Initializable{
         String replaceTitle = "LOWER(REPLACE(displayTitle,\"'\",\" \"))";
         String queryPlace = "SELECT placeLookup,displayTitle,verses,featureType,verseCount FROM places where "+replaceTitle+" like '"+selectedItem.toLowerCase().replace("'", " ")+"'";
         places = Database.instance.getAllPlaces(queryPlace);
+        Set<String> uniquesPeople = new HashSet<String>();
         series.getData().clear();
 
         for (Places places2 : places) {
@@ -147,10 +161,53 @@ public class DetailPlaceController implements Initializable{
                 featureType = places2.getFeatureType();
             }else{
                 featureType = "unknown";
-            }  
+            }
+            // System.out.println(places2.getPlacesPeople());
+            // if(places2.getPlacesPeople()!=null){
+            //     placesPeople = places2.getPlacesPeople();
+            //     String[] peopleSplit = placesPeople.split(",");
+            //     for (String peopleSplit2 : peopleSplit) {
+            //         String queryPeople = "SELECT personLookup,name,gender FROM people where lower(personLookUp)='"+peopleSplit2.toLowerCase()+"'";
+            //         peopleFromPlaces.addAll(Database.instance.getAllPeople(queryPeople));
+            //     }
+
+            // }else{
+            //     placesPeople = "unknown";
+            // }
+            
+            // for (People people2:peopleFromPlaces){
+            //     if(people2.getName()!=null){
+            //         if(peopleFromPlaces.indexOf(people2)==peopleFromPlaces.size()-1){
+            //             if(!uniquesPeople.contains(people2.getName())){
+            //                 uniquesPeople.add(people2.getName());
+            //                 arrGender.add(people2.getGender());
+            //                 System.out.println(arrGender+" ini yg true");
+            //             }
+            //         }else{
+            //             if(!uniquesPeople.contains(people2.getName())){
+            //                 uniquesPeople.add(people2.getName());
+            //                 arrGender.add(people2.getGender());
+            //                 System.out.println(arrGender+" ini yg false");
+            //             }
+            //         }
+            //     }
+            // }
+            
 
             if(places2.getVerses()!=null){
                 for (Verses verses2 : verses) {
+                    System.out.println(verses2.getPeople()+" ini baru");
+                    if(verses2.getPeople()!=null){
+                        placesPeople = verses2.getPeople();
+                        String[] peopleSplit = placesPeople.split(",");
+                        for (String peopleSplit2 : peopleSplit) {
+                            String queryPeople = "SELECT personLookup,name,gender FROM people where lower(personLookUp)='"+peopleSplit2.toLowerCase()+"'";
+                            peopleFromPlaces.addAll(Database.instance.getAllPeople(queryPeople));
+                        }
+                    }else{
+                        placesPeople = "unknown";
+                    }
+
                     if(verses2.getTimeline()!=null){
                         String replaceEventTitle = "LOWER(REPLACE(title,\"'\",\" \"))";
                         String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places,peoples FROM events where "+replaceEventTitle+" like '"+verses2.getTimeline().toLowerCase().replace("'", " ")+"'";
@@ -173,26 +230,26 @@ public class DetailPlaceController implements Initializable{
 
                             if(startDate != null){
                                 if(title != null){
-                                    System.out.println("ini start date "+startDate);
-                                    System.out.println("ini title "+title);
-                                    System.out.println(" ");
+                                    // System.out.println("ini start date "+startDate);
+                                    // System.out.println("ini title "+title);
+                                    // System.out.println(" ");
                                     int year = Integer.parseInt(startDate); 
                                     series.getData().add(new XYChart.Data(title,year));
                                 }else{
                                     title = "unknown";
-                                    System.out.println("ini title "+title);
-                                    System.out.println("ini start date "+startDate);
+                                    // System.out.println("ini title "+title);
+                                    // System.out.println("ini start date "+startDate);
                                     int year = Integer.parseInt(startDate); 
                                     series.getData().add(new XYChart.Data(title,year));
                                 }  
                             }else{
                                 startDate = "unknown";
-                                System.out.println("ini start date "+startDate);
+                                // System.out.println("ini start date "+startDate);
                                 if(title !=null){
-                                    System.out.println("ini title "+title);
+                                    // System.out.println("ini title "+title);
                                 }else{
                                     title = "unknown";
-                                    System.out.println("ini title "+title);
+                                    // System.out.println("ini title "+title);
                                 }   
                             }  
                             }   
@@ -206,10 +263,28 @@ public class DetailPlaceController implements Initializable{
                         }
                     }
                 }
+                for (People people2:peopleFromPlaces){
+                    if(people2.getName()!=null){
+                        if(peopleFromPlaces.indexOf(people2)==peopleFromPlaces.size()-1){
+                            if(!uniquesPeople.contains(people2.getName())){
+                                uniquesPeople.add(people2.getName());
+                                arrGender.add(people2.getGender());
+                                System.out.println(arrGender+" ini yg true");
+                            }
+                        }else{
+                            if(!uniquesPeople.contains(people2.getName())){
+                                uniquesPeople.add(people2.getName());
+                                arrGender.add(people2.getGender());
+                                System.out.println(arrGender+" ini yg false");
+                            }
+                        }
+                    }
+                }
             }else{
                 eventVerses = "unknown";
-            }  
-            
+            }
+
+           
         }
         lineChartPlaces.getData().addAll(series);
 //================================================TIMELINE=================================================================
@@ -229,6 +304,25 @@ public class DetailPlaceController implements Initializable{
             );
 
         //==============================text=================================
+
+        //=============================BAR GENDER=======================================
+        
+        // Map<String, Integer> countsBar = new HashMap<String, Integer>();
+        Integer countFemale= Collections.frequency(arrGender, "Female");
+        Integer countMale= Collections.frequency(arrGender, "Male");
+
+        System.out.println(countFemale+" dan "+countMale);
+        System.out.println(uniquesPeople+" dan "+arrGender);
+
+        XYChart.Series dataPeople = new XYChart.Series<>();
+        dataPeople.setName(selectedItem);
+        dataPeople.getData().add(new XYChart.Data("Female",countFemale));
+        dataPeople.getData().add(new XYChart.Data("Male",countMale));
+        barPlaces.getData().add(dataPeople);
+
+        detailBarChart1.setText(uniquesPeople.toString());
+
+        //=============================BAR GENDER=======================================
 
         //==============Pie Chart=====================
         Map<String, Integer> counts = new HashMap<String, Integer>();

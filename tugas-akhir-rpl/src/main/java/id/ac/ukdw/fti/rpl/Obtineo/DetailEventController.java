@@ -159,8 +159,6 @@ public class DetailEventController implements Initializable {
         Set<String> uniques = new HashSet<String>();
         Set<String> uniquesPeople = new HashSet<String>();
 
-        
-        Map<String, String> pair = new HashMap<String, String>();
         for (Events events2 : events) {
             title = events2.getEventTitle();
             
@@ -219,11 +217,12 @@ public class DetailEventController implements Initializable {
             }else{
                 startDate = "unknown";
             }
-
+            
             if(events2.getEventPeople()!=null){
                 eventPeople = events2.getEventPeople();
                 String[] peopleSplit = eventPeople.split(",");
                 for (String peopleSplit2 : peopleSplit) {
+                    System.out.println(peopleSplit2);
                     String queryPeople = "SELECT personLookup,name,gender FROM people where lower(personLookUp)='"+peopleSplit2.toLowerCase()+"'";
                     peopleFromEvent.addAll(Database.instance.getAllPeople(queryPeople));
                 }

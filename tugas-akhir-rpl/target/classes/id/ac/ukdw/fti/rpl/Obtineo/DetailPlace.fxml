@@ -100,7 +100,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="881.0">
                                  <children>
-                                    <BarChart layoutX="14.0" prefHeight="397.0" prefWidth="774.0" title="People in Places">
+                                    <BarChart fx:id="barPlaces" layoutX="33.0" layoutY="44.0" prefHeight="333.0" prefWidth="493.0" title="People in Places">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -108,8 +108,14 @@
                                         <NumberAxis prefWidth="0.0" side="LEFT" />
                                       </yAxis>
                                     </BarChart>
-                                    <Label fx:id="detailBarChart" layoutX="636.0" layoutY="44.0" text="Label" />
-                                    <Label fx:id="detailBarChart1" layoutX="550.0" layoutY="79.0" prefHeight="283.0" prefWidth="228.0" text="Detail" />
+                                    <Label fx:id="detailBarChart" layoutX="636.0" layoutY="44.0" text="Detail">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></Label>
+                                    <Label fx:id="detailBarChart1" layoutX="575.0" layoutY="79.0" prefHeight="61.0" prefWidth="228.0" text="Detail">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></Label>
                                  </children>
                               </AnchorPane>
                           </content>

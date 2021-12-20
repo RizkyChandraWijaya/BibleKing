@@ -28,6 +28,10 @@ public class Places {
         this.featureType = featureType;
     }
 
+    public void setPlacesPeople(String placesPeople) {
+        this.placesPeople = placesPeople;
+    }
+
     public String getVerseId() {
         return this.placeLookup;
     }
@@ -50,10 +54,6 @@ public class Places {
 
     public String getPlacesPeople() {
         return this.placesPeople;
-    }
-
-    public void setPlacesPeople(String placesPeople) {
-        this.placesPeople = placesPeople;
     }
 
 }
