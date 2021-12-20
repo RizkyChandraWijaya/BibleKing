@@ -172,25 +172,24 @@ public class DetailEventController implements Initializable {
                     placesFromEvent.addAll(Database.instance.getAllPlaces(queryPlaces));
                 }
 
-                
-                for (Places places2:placesFromEvent){
-                    if(places2.getDisplayTitle()!=null){
-                        if(placesFromEvent.indexOf(places2)==placesFromEvent.size()-1){
-                            // displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle();
-                            uniques.add(places2.getDisplayTitle());
-
+                //perulangan untuk akses places from event
+                for (Places places3:placesFromEvent){
+                    if(places3.getDisplayTitle()!=null){
+                        if(placesFromEvent.indexOf(places3)==placesFromEvent.size()-1){
+                            if(!uniques.contains(places3.getDisplayTitle())){
+                                uniques.add(places3.getDisplayTitle());
+                                arrFeatureType.add(places3.getFeatureType());
+                            }
                         }else{
-                            // displayTitlePlaces = displayTitlePlaces+places2.getDisplayTitle()+", ";
-                            uniques.add(places2.getDisplayTitle());
-                        }
-                        //System.out.println(places2.getFeatureType());
-                        if(places2.getFeatureType()!=null){
-                            arrFeatureType.add(places2.getFeatureType());
-                        }else{
-                            arrFeatureType.add("Unknown");
+                            if(!uniques.contains(places3.getDisplayTitle())){
+                                uniques.add(places3.getDisplayTitle());
+                                arrFeatureType.add(places3.getFeatureType());
+                            }
                         }
                     }
                 }
+
+
             }else{
                 // displayTitlePlaces = "Unknown";
                 arrFeatureType.add("Unknown");
@@ -316,14 +315,12 @@ public class DetailEventController implements Initializable {
 
 
         //=============================BAR GENDER=======================================
-                
-
         
-        Map<String, Integer> countsBar = new HashMap<String, Integer>(); 
+        // Map<String, Integer> countsBar = new HashMap<String, Integer>(); 
         Integer countFemale= Collections.frequency(arrGender, "Female");
         Integer countMale= Collections.frequency(arrGender, "Male");
-        System.out.println(countFemale+" dan "+countMale);
-        System.out.println(uniquesPeople+" dan "+arrGender);
+        // System.out.println(countFemale+" dan "+countMale);
+        // System.out.println(uniquesPeople+" dan "+arrGender);
         XYChart.Series dataPeople = new XYChart.Series<>();
         dataPeople.setName(selectedItem);
         dataPeople.getData().add(new XYChart.Data("Female",countFemale));
@@ -333,15 +330,10 @@ public class DetailEventController implements Initializable {
 
         detailBarChart.setText(uniquesPeople.toString());
 
-
-
-
         //=============================BAR GENDER=======================================
 
 
-
-
-        //PIE CHART
+        //PIE CHART BERHASIL
         Map<String, Integer> counts = new HashMap<String, Integer>(); 
  
         for (String ft : arrFeatureType) { 
@@ -365,17 +357,14 @@ public class DetailEventController implements Initializable {
         for(int i=0;i<arrNameFt.size(); i++){
             list.add(new PieChart.Data(arrNameFt.get(i),arrCountFt.get(i)));
             }
-        // System.out.println(list);
+        System.out.println(list);
+        System.out.println(arrFeatureType);
         
         eventPieChart.setData(list);
         
         //DETAIL PIE CHART
 
-        // detailPieChart.setText(pair.toString());
-
-
-
-
+        detailPieChart.setText(uniques.toString());
 
     }
 
