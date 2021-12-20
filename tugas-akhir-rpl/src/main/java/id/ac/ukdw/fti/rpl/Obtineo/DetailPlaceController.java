@@ -1,5 +1,4 @@
 package id.ac.ukdw.fti.rpl.Obtineo;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,9 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import id.ac.ukdw.fti.rpl.Obtineo.database.Database;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.People;
@@ -85,9 +81,6 @@ public class DetailPlaceController implements Initializable{
     private Tab graphPlaceDesc;
 
     @FXML
-    private ScatterChart<String,Number> chartEvent;
-
-    @FXML
     private ImageView btnBackPlace;
 
     @FXML
@@ -107,6 +100,7 @@ public class DetailPlaceController implements Initializable{
     private String displayTitle;
     private String featureType;
     private String eventVerses = "";
+    private String displayPeople = "";
     private String duration;
     private String startDate;
     private String title;
@@ -120,7 +114,7 @@ public class DetailPlaceController implements Initializable{
     private ArrayList<String> arrGender = new ArrayList<String>();
     private ObservableList<People> peopleFromPlaces = FXCollections.observableArrayList();
     XYChart.Series series = new XYChart.Series();
-
+    Set<String> uniques = new HashSet<String>();
 
     //yang dijalankan pertama kali
     @Override
@@ -134,7 +128,7 @@ public class DetailPlaceController implements Initializable{
             String query = "SELECT osisRef, verseText,yearNum,places,placesCount,timeline,people FROM verses where lower(osisRef)='"+ayat.toLowerCase()+"'";
             verses.addAll(Database.instance.getAllVerses(query));
         }
-        
+
         //set nilai table dan label text
         tablePlaceVerses.setPlaceholder(new Label("Tidak ada ayat yang ditemukan pada place "+selectedItem));
         placeTitle.setText(selectedItem);
@@ -162,41 +156,9 @@ public class DetailPlaceController implements Initializable{
             }else{
                 featureType = "unknown";
             }
-            // System.out.println(places2.getPlacesPeople());
-            // if(places2.getPlacesPeople()!=null){
-            //     placesPeople = places2.getPlacesPeople();
-            //     String[] peopleSplit = placesPeople.split(",");
-            //     for (String peopleSplit2 : peopleSplit) {
-            //         String queryPeople = "SELECT personLookup,name,gender FROM people where lower(personLookUp)='"+peopleSplit2.toLowerCase()+"'";
-            //         peopleFromPlaces.addAll(Database.instance.getAllPeople(queryPeople));
-            //     }
-
-            // }else{
-            //     placesPeople = "unknown";
-            // }
-            
-            // for (People people2:peopleFromPlaces){
-            //     if(people2.getName()!=null){
-            //         if(peopleFromPlaces.indexOf(people2)==peopleFromPlaces.size()-1){
-            //             if(!uniquesPeople.contains(people2.getName())){
-            //                 uniquesPeople.add(people2.getName());
-            //                 arrGender.add(people2.getGender());
-            //                 System.out.println(arrGender+" ini yg true");
-            //             }
-            //         }else{
-            //             if(!uniquesPeople.contains(people2.getName())){
-            //                 uniquesPeople.add(people2.getName());
-            //                 arrGender.add(people2.getGender());
-            //                 System.out.println(arrGender+" ini yg false");
-            //             }
-            //         }
-            //     }
-            // }
-            
 
             if(places2.getVerses()!=null){
                 for (Verses verses2 : verses) {
-                    System.out.println(verses2.getPeople()+" ini baru");
                     if(verses2.getPeople()!=null){
                         placesPeople = verses2.getPeople();
                         String[] peopleSplit = placesPeople.split(",");
@@ -225,41 +187,33 @@ public class DetailPlaceController implements Initializable{
                                 }
                             arrDuration.add(newDuration); 
 //================================================TIMELINE=================================================================
+
                             startDate = events2.getStartDate();
                             title = events2.getEventTitle();
-
                             if(startDate != null){
                                 if(title != null){
-                                    // System.out.println("ini start date "+startDate);
-                                    // System.out.println("ini title "+title);
-                                    // System.out.println(" ");
                                     int year = Integer.parseInt(startDate); 
                                     series.getData().add(new XYChart.Data(title,year));
                                 }else{
                                     title = "unknown";
-                                    // System.out.println("ini title "+title);
-                                    // System.out.println("ini start date "+startDate);
                                     int year = Integer.parseInt(startDate); 
                                     series.getData().add(new XYChart.Data(title,year));
                                 }  
                             }else{
                                 startDate = "unknown";
-                                // System.out.println("ini start date "+startDate);
                                 if(title !=null){
-                                    // System.out.println("ini title "+title);
                                 }else{
                                     title = "unknown";
-                                    // System.out.println("ini title "+title);
                                 }   
                             }  
                             }   
                         }
                         
                         if(verses.indexOf(verses2)==verses.size()-1){
-                            eventVerses = eventVerses + verses2.getTimeline();
+                            uniques.add(verses2.getTimeline());
                             
                         }else{
-                            eventVerses = eventVerses + verses2.getTimeline()+", ";
+                            uniques.add(verses2.getTimeline());
                         }
                     }
                 }
@@ -269,13 +223,11 @@ public class DetailPlaceController implements Initializable{
                             if(!uniquesPeople.contains(people2.getName())){
                                 uniquesPeople.add(people2.getName());
                                 arrGender.add(people2.getGender());
-                                System.out.println(arrGender+" ini yg true");
                             }
                         }else{
                             if(!uniquesPeople.contains(people2.getName())){
                                 uniquesPeople.add(people2.getName());
                                 arrGender.add(people2.getGender());
-                                System.out.println(arrGender+" ini yg false");
                             }
                         }
                     }
@@ -283,19 +235,22 @@ public class DetailPlaceController implements Initializable{
             }else{
                 eventVerses = "unknown";
             }
-
-           
         }
         lineChartPlaces.getData().addAll(series);
 //================================================TIMELINE=================================================================
-
         
+        String[] uniqueEvent = uniques.toArray(new String[uniques.size()]);
+        for(int m = 0; m<uniqueEvent.length;m++){
+            if(uniqueEvent[m] == uniqueEvent[uniqueEvent.length-1]){
+                eventVerses += uniqueEvent[m];   
+            }else{
+                eventVerses += uniqueEvent[m] + ", ";    
+            }
+        }
         int eventVerseLenght = eventVerses.length();
         if(eventVerseLenght>100){
-            for (int i=1;i<=Math.floor(eventVerseLenght/100);i++){
-                
+            for (int i=1;i<=Math.floor(eventVerseLenght/100);i++){          
                 eventVerses = eventVerses.substring(0, 100*i+1) +"-\n"+eventVerses.substring(100*i+1,eventVerseLenght);
-                
             }
         }
         labelDetail.setText(    "Places: "+displayTitle +"\n\n"+
@@ -303,16 +258,10 @@ public class DetailPlaceController implements Initializable{
                                 "Events : "+eventVerses +"\n\n"
             );
 
-        //==============================text=================================
-
         //=============================BAR GENDER=======================================
-        
         // Map<String, Integer> countsBar = new HashMap<String, Integer>();
         Integer countFemale= Collections.frequency(arrGender, "Female");
         Integer countMale= Collections.frequency(arrGender, "Male");
-
-        System.out.println(countFemale+" dan "+countMale);
-        System.out.println(uniquesPeople+" dan "+arrGender);
 
         XYChart.Series dataPeople = new XYChart.Series<>();
         dataPeople.setName(selectedItem);
@@ -320,7 +269,26 @@ public class DetailPlaceController implements Initializable{
         dataPeople.getData().add(new XYChart.Data("Male",countMale));
         barPlaces.getData().add(dataPeople);
 
-        detailBarChart1.setText(uniquesPeople.toString());
+        String[] arrUniquePeople = uniques.toArray(new String[uniquesPeople.size()]);
+
+        for(int n = 0; n<arrUniquePeople.length;n++){
+            if(arrUniquePeople[n] == arrUniquePeople[arrUniquePeople.length-1]){
+                displayPeople += arrUniquePeople[n];   
+            }else{
+                displayPeople += arrUniquePeople[n] + ", ";    
+            }
+        }
+        int popleLength = displayPeople.length();
+        
+        if(popleLength>30){
+            for (int i=1;i<=Math.floor(popleLength/30);i++){
+                
+                displayPeople = displayPeople.substring(0, 30*i+1) +"-\n"+displayPeople.substring(30*i+1,popleLength);
+                
+            }
+        }
+
+        detailBarChart1.setText(displayPeople);
 
         //=============================BAR GENDER=======================================
 

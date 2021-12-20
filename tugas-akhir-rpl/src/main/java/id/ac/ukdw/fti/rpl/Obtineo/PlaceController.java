@@ -1,5 +1,4 @@
 package id.ac.ukdw.fti.rpl.Obtineo;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -54,7 +52,6 @@ public class PlaceController{
             for (Places places2 : places) {
                 listPlaces.add(places2.getDisplayTitle()+"\n"+places2.getVerses());
             } 
-
             //pengecekkan searching ditemukan hasil atau tidak
             if (listPlaces.size()>0) {
                 placesView.setItems(listPlaces);
@@ -63,7 +60,6 @@ public class PlaceController{
             }
         }
     }
-
     //menghapus placeholder dan hasil pencarian onKeyPressed
     @FXML
     void deleteSugesstion(KeyEvent event) {
@@ -90,9 +86,6 @@ public class PlaceController{
                 selectedItemVerses.add(ayat[i].strip());
             }
 
-            // System.out.println(selectedItemVerses.size());
-            // System.out.println(selectedItemVerses.get(0));
-
             //pindah halam ke detailPlaces
             Parent root = FXMLLoader.load(getClass().getResource("DetailPlace.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -103,7 +96,6 @@ public class PlaceController{
             e.getMessage();
         }
     }
-
     //pindah ke homePage
     @FXML
     void backHome(MouseEvent event) throws IOException{
@@ -145,7 +137,6 @@ public class PlaceController{
     public static String getSelectedItem() {
         return selectedItem;
     }
-
     //get list ayat berdasar place yg dipilih
     public static List<String> getSelectedItemVerses() {
         return selectedItemVerses;

@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import id.ac.ukdw.fti.rpl.Obtineo.database.Database;
 import id.ac.ukdw.fti.rpl.Obtineo.modal.Events;
@@ -22,8 +20,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -37,14 +40,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.scene.chart.ScatterChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
-import javafx.scene.chart.PieChart.Data;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.LineChart;
 
 public class DetailEventController implements Initializable {
     @FXML
@@ -94,9 +89,6 @@ public class DetailEventController implements Initializable {
     private TextArea detailText;
 
     @FXML
-    private ScatterChart<String,Number> chartEvent;
-
-    @FXML
     private ImageView btnBackEvent;
 
     @FXML
@@ -119,6 +111,7 @@ public class DetailEventController implements Initializable {
     private String places;
     private String displayTitlePlaces = "";
     private String featureTypePlaces = "";
+    private String displayPeople = "";
     private String title;
     private String placeEvent;
     private String duration;
@@ -129,9 +122,6 @@ public class DetailEventController implements Initializable {
     private ArrayList<String> arrFeatureType = new ArrayList<String>();
     private ArrayList<String> arrGender = new ArrayList<String>();
     private ObservableList<People> peopleFromEvent = FXCollections.observableArrayList();
-
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -153,15 +143,11 @@ public class DetailEventController implements Initializable {
         String replaceTitle = "LOWER(REPLACE(title,\"'\",\" \"))";
         String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places,peoples FROM events where "+replaceTitle+" like '"+selectedItem.toLowerCase().replace("'", " ")+"'";
         events = Database.instance.getAllEvents(queryEvent);
-        
-        // String queryEvent = "SELECT title,verseSort,verses,startDate,duration,predecessor,partOf,places FROM events where lower(title) like '"+selectedItem.toLowerCase()+"'";
-        // events = Database.instance.getAllEvents(queryEvent);
         Set<String> uniques = new HashSet<String>();
         Set<String> uniquesPeople = new HashSet<String>();
 
         for (Events events2 : events) {
             title = events2.getEventTitle();
-            
             if(events2.getPlacesVerses()!=null){
                 placeEvent = events2.getPlacesVerses();
                 String[] placesSplit = placeEvent.split(",");
@@ -169,7 +155,6 @@ public class DetailEventController implements Initializable {
                     String queryPlaces = "SELECT placeLookup,displayTitle,verses,featureType,verseCount FROM places where lower(placeLookup)='"+placesSplit2.toLowerCase()+"'";
                     placesFromEvent.addAll(Database.instance.getAllPlaces(queryPlaces));
                 }
-
                 //perulangan untuk akses places from event
                 for (Places places3:placesFromEvent){
                     if(places3.getDisplayTitle()!=null){
@@ -189,10 +174,8 @@ public class DetailEventController implements Initializable {
 
 
             }else{
-                // displayTitlePlaces = "Unknown";
                 arrFeatureType.add("Unknown");
             }
-            
 
             if(events2.getDuration()!=null){
                 duration = events2.getDuration();
@@ -222,15 +205,12 @@ public class DetailEventController implements Initializable {
                 eventPeople = events2.getEventPeople();
                 String[] peopleSplit = eventPeople.split(",");
                 for (String peopleSplit2 : peopleSplit) {
-                    System.out.println(peopleSplit2);
                     String queryPeople = "SELECT personLookup,name,gender FROM people where lower(personLookUp)='"+peopleSplit2.toLowerCase()+"'";
                     peopleFromEvent.addAll(Database.instance.getAllPeople(queryPeople));
                 }
-
             }else{
                 eventPeople = "unknown";
             }
-
             //perulangan untuk akses people from event
             for (People people2:peopleFromEvent){
                 if(people2.getName()!=null){
@@ -247,11 +227,16 @@ public class DetailEventController implements Initializable {
                     }
                 }
             }
-
-
         }
-        
-    
+        String[] uniquePlaces = uniques.toArray(new String[uniques.size()]);
+
+        for(int m = 0; m<uniquePlaces.length;m++){
+            if(uniquePlaces[m] == uniquePlaces[uniquePlaces.length-1]){
+                displayTitlePlaces += uniquePlaces[m];   
+            }else{
+                displayTitlePlaces += uniquePlaces[m] + ", ";    
+            }
+        }
         int lengtPlaceFromEvent = displayTitlePlaces.length();
         if(lengtPlaceFromEvent>100){
             for (int i=1;i<=Math.floor(lengtPlaceFromEvent/100);i++){
@@ -260,8 +245,6 @@ public class DetailEventController implements Initializable {
                 
             }
         }
-        
-        displayTitlePlaces = displayTitlePlaces.join(", ", uniques);
         labelDetail.setText(    "Event: "+selectedItem +"\n\n"+
                                 "Places: "+displayTitlePlaces+"\n\n"+
                                 "Duration: "+duration+"\n\n"+
@@ -269,11 +252,8 @@ public class DetailEventController implements Initializable {
                                 "Part Of: "+partOf+"\n\n"+
                                 "Start Date: "+startDate+"\n\n"
             );
-        //=========================text====================================
+
         //~~~~~~~~~~~~~~~~~~timeline~~~~~~~~~~~~~~~~~~~
-        // NumberAxis xAxis = new NumberAxis(0, 90, 10);
-        // NumberAxis yAxis = new NumberAxis(20, 90, 10);
-        // chartEvent = new ScatterChart(xAxis, yAxis);
         XYChart.Series series = new XYChart.Series();
         
         for (Verses verse : verses) {
@@ -283,7 +263,6 @@ public class DetailEventController implements Initializable {
             if(places!=null) {
                 int placeCount = verse.getPlacesCount();
                 String[] arrPlaces = places.split(","); 
-                System.out.println(arrPlaces.toString());
                 if(yearNum!=null){
                     int year = Integer.parseInt(yearNum);  
                     for(int i = 0; i < placeCount; i++){
@@ -298,35 +277,41 @@ public class DetailEventController implements Initializable {
                     }
                 }
             }
-            // series.getData().add(new XYChart.Data(place,tahun));
-            
         }
-
         timeline.getData().addAll(series);
-
-
         //=============================BAR GENDER=======================================
         
-        // Map<String, Integer> countsBar = new HashMap<String, Integer>(); 
         Integer countFemale= Collections.frequency(arrGender, "Female");
         Integer countMale= Collections.frequency(arrGender, "Male");
-        // System.out.println(countFemale+" dan "+countMale);
-        // System.out.println(uniquesPeople+" dan "+arrGender);
         XYChart.Series dataPeople = new XYChart.Series<>();
         dataPeople.setName(selectedItem);
         dataPeople.getData().add(new XYChart.Data("Female",countFemale));
         dataPeople.getData().add(new XYChart.Data("Male",countMale));
-
         peopleEventBar.getData().add(dataPeople);
 
-        detailBarChart.setText(uniquesPeople.toString());
+        String[] arrUniquePeople = uniques.toArray(new String[uniquesPeople.size()]);
+
+        for(int n = 0; n<arrUniquePeople.length;n++){
+            if(arrUniquePeople[n] == arrUniquePeople[arrUniquePeople.length-1]){
+                displayPeople += arrUniquePeople[n];   
+            }else{
+                displayPeople += arrUniquePeople[n] + ", ";    
+            }
+        }
+        int popleLength = displayPeople.length();  
+        if(popleLength>30){
+            for (int i=1;i<=Math.floor(popleLength/30);i++){
+                
+                displayPeople = displayPeople.substring(0, 30*i+1) +"-\n"+displayPeople.substring(30*i+1,popleLength);
+                
+            }
+        }
+        detailBarChart.setText(displayPeople);
 
         //=============================BAR GENDER=======================================
 
-
         //PIE CHART BERHASIL
         Map<String, Integer> counts = new HashMap<String, Integer>(); 
- 
         for (String ft : arrFeatureType) { 
             if (counts.containsKey(ft)) { 
                 counts.put(ft, counts.get(ft) + 1); 
@@ -334,12 +319,9 @@ public class DetailEventController implements Initializable {
                 counts.put(ft, 1); 
             } 
         } 
-        
         ArrayList<String> arrNameFt = new ArrayList<String>();
         ArrayList<Integer> arrCountFt = new ArrayList<Integer>();
-        
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            // System.out.println(entry.getKey()+" "+entry.getValue());
             arrNameFt.add(entry.getKey());
             arrCountFt.add(entry.getValue());
         }
@@ -347,16 +329,11 @@ public class DetailEventController implements Initializable {
         ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
         for(int i=0;i<arrNameFt.size(); i++){
             list.add(new PieChart.Data(arrNameFt.get(i),arrCountFt.get(i)));
-            }
-        System.out.println(list);
-        System.out.println(arrFeatureType);
-        
+            }    
         eventPieChart.setData(list);
-        
         //DETAIL PIE CHART
 
         detailPieChart.setText(uniques.toString());
-
     }
 
     @FXML
@@ -385,8 +362,5 @@ public class DetailEventController implements Initializable {
 
     @FXML
     void detailText(MouseEvent event){
-        // String selectedVerses = tableEventVerse.getSelectionModel().getSelectedItem().toString();
-        // String queryText = "SELECT title,startDate,duration,predecessor,partOf,'places (from verses)'  FROM event where lower(osisRef)='"+selectedVerses.toLowerCase()+"'";
-        // events.addAll(Database.instance.getAllVerses(queryText));
     }
 }
